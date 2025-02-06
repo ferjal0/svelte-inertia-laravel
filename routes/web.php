@@ -17,23 +17,23 @@ Route::get('/', function () {
     ]);
 });
 
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/account/profile', [ProfileController::class, 'show'])->name('profile.show');
-//     Route::patch('/account/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/account/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware('auth')->group(function () {
+    Route::get('/account/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::patch('/account/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/account/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-//     Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
+    Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
 
-//     Route::get('/account/security', [SecurityController::class, 'show'])->name('security.show');
+    Route::get('/account/security', [SecurityController::class, 'show'])->name('security.show');
 
-//     Route::delete('/account/sessions/other-browser-sessions', [SessionController::class, 'destroyOtherSessions'])
-//         ->name('other-browser-sessions.destroy');
-//     Route::delete('/account/sessions/browser-sessions/{id}', [SessionController::class, 'destroySession'])
-//         ->name('browser-sessions.destroy');
-// });
+    Route::delete('/account/sessions/other-browser-sessions', [SessionController::class, 'destroyOtherSessions'])
+        ->name('other-browser-sessions.destroy');
+    Route::delete('/account/sessions/browser-sessions/{id}', [SessionController::class, 'destroySession'])
+        ->name('browser-sessions.destroy');
+});
 
 require __DIR__ . '/auth.php';

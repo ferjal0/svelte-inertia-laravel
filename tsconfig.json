@@ -1,4 +1,5 @@
 {
+    "extends": "@tsconfig/svelte/tsconfig.json",
     "compilerOptions": {
         "allowJs": true,
         "module": "ESNext",
@@ -13,13 +14,15 @@
         "noEmit": true,
         "baseUrl": ".",
         "paths": {
+            "$lib": ["./resources/js/lib"],
+            "$lib/*": ["./resources/js/lib/*"],
             "@/*": ["./resources/js/*"],
             "ziggy-js": ["./vendor/tightenco/ziggy"]
         }
     },
     "include": [
         "resources/js/**/*.ts",
-        "resources/js/**/*.tsx",
+        "resources/js/**/*.svelte",
         "resources/js/**/*.d.ts"
     ]
 }

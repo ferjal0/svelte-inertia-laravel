@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title inertia>{{ config('app.name', 'React Inertia Laravel') }}</title>
+    <title inertia>{{ config('app.name', 'Svelte Inertia Laravel') }}</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('favicon.png') }}">
@@ -16,8 +16,7 @@
 
     <!-- Scripts -->
     @routes
-    @viteReactRefresh
-    @vite(['resources/js/app.tsx', "resources/js/Pages/{$page['component']}.tsx"])
+    @vite(['resources/js/app.ts', "resources/js/Pages/{$page['component']}.svelte"])
     @inertiaHead
 </head>
 

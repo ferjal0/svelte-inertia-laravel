@@ -1,25 +1,29 @@
 <script lang="ts">
     import Ripple from '$lib/components/ui/custom/ripple.svelte';
-    import type { PageProps } from '@/types';
+    import type { PageProps } from '$lib/types';
     import { Link } from '@inertiajs/svelte';
     import { Command } from 'lucide-svelte';
 
     let { auth } = $props() as PageProps;
 </script>
 
+<svelte:head>
+    <title>Welcome</title>
+</svelte:head>
+
 <div class="flex h-svh flex-col">
     <header>
         <div
             class="mx-auto flex max-w-7xl items-center justify-between p-6 md:p-10"
         >
-            <a href="/" class="flex items-center gap-2 font-medium">
+            <Link href="/" class="flex items-center gap-2 font-medium">
                 <div
                     class="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground"
                 >
                     <Command class="size-4" />
                 </div>
                 Svelte Inertia
-            </a>
+            </Link>
 
             <nav class="flex items-center gap-4">
                 {#if auth.user}

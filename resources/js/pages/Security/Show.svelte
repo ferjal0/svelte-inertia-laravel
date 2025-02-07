@@ -1,16 +1,12 @@
 <script lang="ts">
     import AuthenticatedLayout from '$lib/layouts/AuthenticatedLayout.svelte';
-    import OpenSessionsForm from './Partials/OpenSessionsForm.svelte';
     import TwoFactorAuthenticationForm from './Partials/TwoFactorAuthenticationForm.svelte';
-    import type { Session } from '$lib/types';
 
     type Props = {
-        sessions: Session[];
         isTwoFactorAuthenticationFeatureEnabled: boolean;
     };
 
-    const { sessions, isTwoFactorAuthenticationFeatureEnabled }: Props =
-        $props();
+    const { isTwoFactorAuthenticationFeatureEnabled }: Props = $props();
 </script>
 
 <svelte:head>
@@ -24,9 +20,5 @@
                 <TwoFactorAuthenticationForm />
             </div>
         {/if}
-
-        <div class="p-4 sm:p-8">
-            <OpenSessionsForm {sessions} />
-        </div>
     </div>
 </AuthenticatedLayout>

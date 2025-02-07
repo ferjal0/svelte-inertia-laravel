@@ -5,21 +5,21 @@
     import { Input } from '$lib/components/ui/input';
     import { Label } from '$lib/components/ui/label';
     import type { Snippet } from 'svelte';
-    import axios, { AxiosError } from 'axios';
+    import axios from 'axios';
 
-    let {
-        title = 'Confirm action with Password',
-        content = 'This action is irreversible. Please type your password to confirm.',
-        button = 'Confirm',
-        onConfirmed,
-        children,
-    } = $props<{
+    interface ConfirmWithPasswordProps {
+        onConfirm: (password: string) => Promise<void>;
         title?: string;
-        content?: string;
-        button?: string;
-        onConfirmed: () => void;
+        description?: string;
         children?: Snippet;
-    }>();
+    }
+
+    const {
+        onConfirm,
+        title = 'Confirm Password',
+        description = 'For your security, please confirm your password to continue.',
+        children,
+    }: ConfirmWithPasswordProps = $props();
 
     let confirmingPassword = $state(false);
     let error = $state('');
@@ -29,7 +29,7 @@
     async function startConfirmingPassword() {
         const response = await axios.get(route('password.confirmation'));
         if (response.data.confirmed) {
-            onConfirmed();
+            onConfirm(password);
         } else {
             confirmingPassword = true;
         }
@@ -43,8 +43,8 @@
                 password: password,
             });
             closeModal();
-            onConfirmed();
-        } catch (e: any) {
+            onConfirm(password);
+        } catch (e) {
             processing = false;
             error = e.response.data.message;
         }
@@ -62,10 +62,6 @@
             confirmPassword();
         }
     }
-
-    $effect(() => {
-        console.log(error);
-    });
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -87,7 +83,7 @@
 
         <div class="flex flex-col gap-4">
             <p class="text-sm text-gray-600 dark:text-gray-400">
-                {content}
+                {description}
             </p>
 
             <div class="flex flex-col gap-2">
@@ -108,7 +104,7 @@
             <Button variant="outline" onclick={closeModal}>Cancel</Button>
 
             <Button onclick={confirmPassword} disabled={processing}>
-                {button}
+                Confirm
             </Button>
         </Dialog.Footer>
     </Dialog.Content>

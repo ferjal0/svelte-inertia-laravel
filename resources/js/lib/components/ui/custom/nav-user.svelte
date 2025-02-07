@@ -15,16 +15,12 @@
     import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
     import * as Sidebar from '$lib/components/ui/sidebar';
     import { useSidebar } from '$lib/components/ui/sidebar';
-    import type { User } from '$lib/types';
-    import { Link } from '@inertiajs/svelte';
+    import type { PageProps } from '$lib/types';
+    import { Link, page } from '@inertiajs/svelte';
     import { setMode } from 'mode-watcher';
 
-    type Props = {
-        user: User;
-    };
-
-    // Props
-    const { user }: Props = $props();
+    let auth = $state($page.props.auth as PageProps['auth']);
+    let user = $derived(auth.user);
 
     const { isMobile } = useSidebar();
 </script>
@@ -45,7 +41,9 @@
                                 alt={user.name}
                             />
                             <Avatar.Fallback class="rounded-lg"
-                                >CN</Avatar.Fallback
+                                >{user.name
+                                    .substring(0, 2)
+                                    .toUpperCase()}</Avatar.Fallback
                             >
                         </Avatar.Root>
                         <div
@@ -76,7 +74,9 @@
                                 alt={user.name}
                             />
                             <Avatar.Fallback class="rounded-lg"
-                                >CN</Avatar.Fallback
+                                >{user.name
+                                    .substring(0, 2)
+                                    .toUpperCase()}</Avatar.Fallback
                             >
                         </Avatar.Root>
                         <div
@@ -142,7 +142,12 @@
                 <DropdownMenu.Separator />
                 <DropdownMenu.Item class="w-full">
                     {#snippet child({ props })}
-                        <Link {...props} href={route('logout')} method="post">
+                        <Link
+                            {...props}
+                            href={route('logout')}
+                            method="post"
+                            as="button"
+                        >
                             <LogOut />
                             <span>Log out</span>
                         </Link>

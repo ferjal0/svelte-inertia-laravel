@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { ChevronRight } from 'lucide-svelte';
+    import { ChevronRight, type Icon } from 'lucide-svelte';
     import * as Collapsible from '$lib/components/ui/collapsible';
     import * as Sidebar from '$lib/components/ui/sidebar';
     import { Link } from '@inertiajs/svelte';
@@ -8,7 +8,7 @@
         items: {
             title: string;
             url: string;
-            icon: any;
+            icon: typeof Icon;
             isActive?: boolean;
             items?: {
                 title: string;
@@ -23,35 +23,30 @@
 <Sidebar.Group>
     <Sidebar.GroupLabel>Platform</Sidebar.GroupLabel>
     <Sidebar.Menu>
-        {#each items as mainItem (mainItem.title)}
-            <Collapsible.Root
-                open={mainItem.isActive}
-                class="group/collapsible"
-            >
+        {#each items as mainItem}
+            <Collapsible.Root open={false} class="group/collapsible">
                 {#snippet child({ props })}
                     <Sidebar.MenuItem {...props}>
-                        <Collapsible.Trigger>
-                            {#snippet child({ props })}
-                                <Sidebar.MenuButton {...props}>
-                                    {#snippet tooltipContent()}
-                                        {mainItem.title}
-                                    {/snippet}
-                                    {#if mainItem.icon}
-                                        <mainItem.icon />
-                                    {/if}
-                                    <span>{mainItem.title}</span>
-                                    {#if mainItem.items}
+                        {#if mainItem.items}
+                            <Collapsible.Trigger>
+                                {#snippet child({ props })}
+                                    <Sidebar.MenuButton {...props}>
+                                        {#snippet tooltipContent()}
+                                            {mainItem.title}
+                                        {/snippet}
+                                        {#if mainItem.icon}
+                                            <mainItem.icon />
+                                        {/if}
+                                        <span>{mainItem.title}</span>
                                         <ChevronRight
                                             class="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90"
                                         />
-                                    {/if}
-                                </Sidebar.MenuButton>
-                            {/snippet}
-                        </Collapsible.Trigger>
-                        <Collapsible.Content>
-                            {#if mainItem.items}
+                                    </Sidebar.MenuButton>
+                                {/snippet}
+                            </Collapsible.Trigger>
+                            <Collapsible.Content>
                                 <Sidebar.MenuSub>
-                                    {#each mainItem.items as subItem (subItem.title)}
+                                    {#each mainItem.items as subItem}
                                         <Sidebar.MenuSubItem>
                                             <Sidebar.MenuSubButton>
                                                 {#snippet child({ props })}
@@ -68,8 +63,22 @@
                                         </Sidebar.MenuSubItem>
                                     {/each}
                                 </Sidebar.MenuSub>
-                            {/if}
-                        </Collapsible.Content>
+                            </Collapsible.Content>
+                        {:else}
+                            <Sidebar.MenuButton {...props}>
+                                {#snippet child({ props })}
+                                    <Link href={mainItem.url} {...props}>
+                                        {#snippet tooltipContent()}
+                                            {mainItem.title}
+                                        {/snippet}
+                                        {#if mainItem.icon}
+                                            <mainItem.icon />
+                                        {/if}
+                                        <span>{mainItem.title}</span>
+                                    </Link>
+                                {/snippet}
+                            </Sidebar.MenuButton>
+                        {/if}
                     </Sidebar.MenuItem>
                 {/snippet}
             </Collapsible.Root>

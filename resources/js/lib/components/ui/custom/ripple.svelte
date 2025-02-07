@@ -9,7 +9,7 @@
     {#each { length: 8 } as iteration, i}
         <div
             id={`ripple-${iteration}`}
-            class="absolute animate-ripple rounded-full bg-foreground/30 shadow-xl border top-1/2 left-1/2 translate-x-1/2 translate-y-1/2 [--i:{i}]"
+            class="absolute animate-ripple rounded-full bg-foreground/30 shadow-xl border top-1/2 left-1/2 translate-x-1/2 translate-y-1/2"
             style="width: {mainCircleSize + i * 70}px;
            height: {mainCircleSize + i * 70}px;
            opacity: {mainCircleOpacity - i * 0.03};

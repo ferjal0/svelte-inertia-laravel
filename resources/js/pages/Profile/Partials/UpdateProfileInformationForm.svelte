@@ -5,7 +5,7 @@
     import ErrorFeedback from '$lib/components/ui/custom/error-feedback.svelte';
     import { Input } from '$lib/components/ui/input';
     import { Label } from '$lib/components/ui/label';
-    import { page } from '@inertiajs/svelte';
+    import { page, router } from '@inertiajs/svelte';
     import { useForm } from '@inertiajs/svelte';
     import { Pencil } from 'lucide-svelte';
     import { toast } from 'svelte-sonner';
@@ -46,6 +46,7 @@
             preserveScroll: true,
             onSuccess: () => {
                 toast.success('Profile updated successfully');
+                router.visit(route('profile.show'));
                 clearPhotoFileInput();
             },
             onError: (errors) => {

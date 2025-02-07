@@ -15,13 +15,11 @@ createServer((page) =>
         },
         setup: ({ el, App, props }) => {
             // @ts-expect-error - Ziggy types
-            global.route = (
-                name: RouteName,
-                params?: any,
-                absolute?: boolean,
-            ) =>
+            global.route = (name: RouteName, params?, absolute?) =>
                 route(name, params, absolute, {
+                    // @ts-expect-error - Ziggy types
                     ...page.props.ziggy,
+                    // @ts-expect-error - Ziggy types
                     location: new URL(page.props.ziggy.location),
                 });
 

@@ -1,0 +1,11 @@
+{
+    "extends": "./tsconfig.json",
+    "include": [
+        "resources/js/**/*.ts",
+        "resources/js/**/*.svelte",
+        "resources/js/**/*.d.ts",
+        "eslint.config.js",
+        "*.js",
+        "*.ts"
+    ]
+}

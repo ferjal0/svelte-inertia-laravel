@@ -25,7 +25,7 @@
     // User data
     const auth = $page.props.auth as PageProps['auth'];
     const user = auth.user;
-    const twoFactorEnabled = $derived(user.two_factor_confirmed_at !== null);
+    let twoFactorEnabled = $state(user.two_factor_confirmed_at !== null);
 
     // Functions
     function enableTwoFactorAuthentication() {
@@ -57,6 +57,7 @@
             preserveState: true,
             onSuccess: () => {
                 qrCode = null;
+                twoFactorEnabled = true;
                 showRecoveryCodes();
                 toast.success('2FA successfully enabled');
             },
@@ -83,21 +84,19 @@
             },
             onSuccess: () => {
                 disabling = false;
+                twoFactorEnabled = false;
+                toast.success('2FA successfully disabled');
             },
             onError: () => {
                 disabling = false;
+                twoFactorEnabled = true;
+                toast.error('There was an error disabling 2FA');
             },
             onFinish: () => {
                 disabling = false;
             },
         });
     }
-
-    $effect(() => {
-        console.log('twoFactorEnabled', twoFactorEnabled);
-        console.log('qrCode', qrCode);
-        console.log('recoveryCodes', recoveryCodes);
-    });
 </script>
 
 <section class="flex max-w-xl flex-col gap-6">
@@ -173,18 +172,45 @@
         </div>
     {/if}
 
-    {#if recoveryCodes.length > 0}
-        <div>
-            <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
-                Store these recovery codes in a secure password manager. They
-                can be used to recover access to your account if your two factor
-                authentication device is lost.
-            </p>
+    {#if twoFactorEnabled && !qrCode}
+        <div class="flex flex-col gap-6">
+            <div class="flex items-center gap-4 text-sm">
+                <CheckCircle class="text-green-500" />
+                <h3>You've already enabled 2FA.</h3>
+            </div>
+            {#if recoveryCodes.length > 0}
+                <div class="flex max-w-xl flex-col gap-4">
+                    <div class="text-sm">
+                        <span
+                            class="font-semibold text-red-600 dark:text-red-400"
+                        >
+                            Important:
+                        </span>
+                        These recovery codes will only be shown once. Store them
+                        in a secure password manager immediately. They can be used
+                        to recover access to your account if your two factor authentication
+                        device is lost.
+                    </div>
 
-            <div class="mt-4 rounded-lg bg-gray-100 p-4 dark:bg-gray-900">
-                {#each recoveryCodes as code}
-                    <div>{code}</div>
-                {/each}
+                    <div
+                        class="grid gap-1 rounded-lg bg-sidebar p-4 font-mono text-xs"
+                    >
+                        {#each recoveryCodes as code}
+                            <div>{code}</div>
+                        {/each}
+                    </div>
+                </div>
+            {/if}
+            <div class="flex gap-4">
+                <ConfirmWithPassword
+                    title="Disable 2FA"
+                    content="To disable two-factor authentication, you must confirm your password."
+                    onConfirmed={disableTwoFactorAuthentication}
+                >
+                    <Button type="button" disabled={disabling}>
+                        {disabling ? 'Disabling...' : 'Disable'}
+                    </Button>
+                </ConfirmWithPassword>
             </div>
         </div>
     {/if}

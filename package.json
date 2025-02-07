@@ -14,13 +14,13 @@
     "scripts": {
         "build": "vite build && vite build --ssr",
         "dev": "vite",
-        "lint": "eslint resources/js --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore --fix",
+        "lint": "eslint resources/js --fix",
+        "format": "prettier --write resources/js",
         "check": "svelte-check --tsconfig ./tsconfig.json"
     },
     "dependencies": {
         "@inertiajs/svelte": "^2.0.3",
-        "axios": "^1.7.9",
-        "svelte": "^5.19.7"
+        "axios": "^1.7.9"
     },
     "devDependencies": {
         "@sveltejs/vite-plugin-svelte": "^5.0.3",
@@ -36,14 +36,18 @@
         "eslint": "^9.19.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-prettier": "^5.2.3",
+        "eslint-plugin-svelte": "^2.46.1",
         "laravel-vite-plugin": "^1.2.0",
         "lucide-svelte": "^0.474.0",
         "mode-watcher": "^0.5.1",
         "postcss": "^8.5.1",
         "prettier": "^3.4.2",
         "prettier-plugin-organize-imports": "^4.1.0",
+        "prettier-plugin-svelte": "^3.3.3",
         "prettier-plugin-tailwindcss": "^0.6.11",
+        "svelte": "^5.19.9",
         "svelte-check": "^4.1.4",
+        "svelte-eslint-parser": "^0.43.0",
         "svelte-sonner": "^0.3.28",
         "tailwind-merge": "^3.0.1",
         "tailwind-variants": "^0.3.1",

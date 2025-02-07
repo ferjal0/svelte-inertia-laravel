@@ -13,6 +13,7 @@
     const { token }: Props = $props();
 
     const form = useForm({
+        _method: 'POST',
         token,
         email: new URLSearchParams(window.location.search).get('email') || '',
         password: '',
@@ -27,7 +28,6 @@
     }
 </script>
 
-# Creating the Svelte version of PasswordReset component
 <svelte:head>
     <title>Reset Password</title>
 </svelte:head>

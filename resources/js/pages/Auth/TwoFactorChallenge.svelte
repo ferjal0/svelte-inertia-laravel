@@ -5,14 +5,27 @@
     import { useForm } from '@inertiajs/svelte';
     import { ShieldCheck } from 'lucide-svelte';
 
-    const form = useForm({
+    const form = useForm<{ code: string; processing: boolean }>({
         code: '',
+        processing: false,
     });
 
-    async function handleSubmit() {
-        if ($form.code.length !== 6) return;
-        $form.post(route('two-factor.login.store'));
-    }
+    const handleChange = async () => {
+        if ($form.code.length !== 6 || $form.processing) return;
+
+        $form.processing = true;
+        $form.post(route('two-factor.login.store'), {
+            preserveScroll: true,
+            preserveState: true,
+            onError: () => {
+                $form.code = '';
+            },
+            onFinish: () => {
+                $form.processing = false;
+                $form.code = '';
+            },
+        });
+    };
 </script>
 
 <svelte:head>
@@ -29,7 +42,7 @@
         <InputOTP.Root
             bind:value={$form.code}
             maxlength={6}
-            onComplete={handleSubmit}
+            onComplete={handleChange}
             autofocus
         >
             {#snippet children({ cells })}

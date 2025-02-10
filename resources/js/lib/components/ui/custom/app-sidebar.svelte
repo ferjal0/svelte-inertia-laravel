@@ -119,7 +119,7 @@
     ];
 </script>
 
-<Sidebar.Root variant="inset" collapsible="icon">
+<Sidebar.Root variant="inset" collapsible="offcanvas">
     <Sidebar.Header>
         <Sidebar.Menu>
             <Sidebar.MenuItem>

@@ -51,11 +51,11 @@ Fortify is configured in `config/fortify.php`. Key features enabled:
 1. User submits credentials
 2. Fortify validates credentials
 3. On success:
-   - Session is created
-   - User is redirected to dashboard
+    - Session is created
+    - User is redirected to dashboard
 4. On failure:
-   - Error response is returned
-   - User stays on login page
+    - Error response is returned
+    - User stays on login page
 
 ## 📡 API Endpoints
 
@@ -84,15 +84,11 @@ DELETE /user/two-factor-authentication  # Disable 2FA
 
 ### Database Configuration
 
-The project uses MySQL by default, but supports PostgreSQL. Configure your database in `.env`:
+The project uses SQLite by default, but supports any database. Configure your database in `.env`:
 
 ```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=your_database
-DB_USERNAME=your_username
-DB_PASSWORD=your_password
+DB_CONNECTION=sqlite
+DB_DATABASE=database.sqlite
 ```
 
 ### Key Models
@@ -112,6 +108,7 @@ All database schemas are defined in migrations under `database/migrations/`. Key
 - Two-factor authentication settings
 
 Run migrations with:
+
 ```bash
 php artisan migrate
 ```

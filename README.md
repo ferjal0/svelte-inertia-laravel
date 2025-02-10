@@ -1,37 +1,57 @@
-# Laravel Inertia React Project Starter
+# Svelte Inertia Laravel - Project Starter
 
-A modern, full-stack web application boilerplate built with Laravel 11, Inertia.js, React 18, TypeScript, Tailwind CSS, and Shadcn UI components.
+A modern, full-stack web application boilerplate built with Laravel 11, Inertia.js, Svelte 5 (with Runes), TypeScript, Tailwind CSS, and Shadcn UI components.
 
-## 🏗️ Architecture Overview
+![Starter Screenshots](https://github.com/user-attachments/assets/a550c79c-87eb-49a2-996b-8bb86991ec99)
 
-This project implements a modern monolithic architecture using Laravel as the backend framework and React for the frontend, seamlessly connected via Inertia.js. This architecture provides:
+## Features
+
+- **Modern Svelte 5 with Runes**
+    - Explicit reactivity with `$state`, `$derived`, and `$effect`
+    - Type-safe props with `$props`
+    - Improved component composition with `$snippet`
+- **Full-Stack Integration**
+    - Laravel 11 backend with robust authentication via Fortify
+    - Seamless frontend-backend communication with Inertia.js
+    - Server-side rendering for optimal performance
+- **Developer Experience**
+    - Hot Module Replacement (HMR) and fast refresh
+    - TypeScript with strict type checking
+    - Modern UI powered by Tailwind CSS and Shadcn
+    - Comprehensive ESLint and Prettier configuration
+
+## Architecture Overview
+
+This project implements a modern monolithic architecture using Laravel as the backend framework and Svelte 5 for the frontend, seamlessly connected via Inertia.js. This architecture provides:
 
 - **Single Codebase**: All code lives in one repository, simplifying deployment and maintenance
-- **Server-Side Rendering**: Improved SEO and initial page load performance
-- **Type Safety**: Full TypeScript support across the frontend
+- **Modern Reactivity**: Svelte 5's Runes system for explicit and powerful state management
+- **Type Safety**: Full TypeScript support with improved type inference
 - **Modern UI**: Powered by Tailwind CSS and Shadcn components
 - **Authentication**: Built-in auth system using Laravel Fortify
-- **Developer Experience**: Hot Module Replacement (HMR) and fast refresh during development
+- **Developer Experience**: Enhanced development workflow with Runes and TypeScript
 
 ### Tech Stack
 
 - **Backend**
+
     - Laravel 11.x (PHP 8.x)
-    - Laravel Fortify for authentication
+    - Laravel Fortify for Auth features
     - SQLite
+
 - **Frontend**
 
-    - React 18.3.1
+    - Svelte 5.19.7 with Runes
     - TypeScript 5.7.3
     - Vite 6.0.11
     - Tailwind CSS
     - Shadcn UI Components
-    - Lucide React Icons
+    - Lucide Svelte Icons
 
-- **Infrastructure**
+- **Frontend-Backend communication**
     - Inertia.js for seamless frontend-backend communication
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -39,14 +59,15 @@ This project implements a modern monolithic architecture using Laravel as the ba
 - Composer
 - Node.js (Latest LTS version)
 - SQLite (but you can use any other RDBMS)
+- Laravel Herd (to run the application)
 
 ### Installation
 
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
-cd laravel-inertia-react-starter
+git clone https://github.com/ferjal0/react-inertia-laravel
+cd react-inertia-laravel
 ```
 
 2. Install PHP dependencies:
@@ -80,66 +101,32 @@ php artisan migrate
 npm run dev
 ```
 
-Visit `http://localhost:8000` to see your application.
+Visit `http://react-inertia-laravel.test` to see your application.
 
-## 📚 Documentation Structure
+## Documentation Structure
 
 The documentation is split into three main sections:
 
-1. [Getting Started](README.md) - This file, containing project overview and setup instructions
-2. [Backend Documentation](backend.md) - Details about Laravel implementation, API endpoints, and authentication
-3. [Frontend Documentation](frontend.md) - React components, Inertia.js integration, and UI architecture
+1. [Getting Started](docs/getting-started.md) - This file, containing project overview and setup instructions
+2. [Backend Documentation](docs/backend.md) - Details about Laravel implementation, API endpoints, and authentication
+3. [Frontend Documentation](docs/frontend.md) - Svelte components, Inertia.js integration, and UI architecture
 
-## 🧪 Testing
-
-```bash
-# Run PHP tests
-php artisan test
-
-# Run JavaScript tests
-npm run test
-```
-
-## 🛠️ Development Workflow
-
-1. Create a new branch for your feature/fix
-2. Write tests for new functionality
-3. Implement your changes
-4. Ensure all tests pass
-5. Submit a pull request
-
-## 📝 Type Checking
-
-The project uses TypeScript for type safety. Run type checking with:
-
-```bash
-npm run typecheck
-```
-
-## 🎨 Code Style
+## Code Style
 
 - PHP code follows PSR-12 standards
-- TypeScript/React code follows the project's ESLint and Prettier configuration
+- TypeScript/Svelte code follows the project's ESLint and Prettier configuration
 - Run style checks with:
 
 ```bash
 # PHP
 ./vendor/bin/pint
 
-# TypeScript/React
+# TypeScript/Svelte
 npm run lint
 ```
 
-## 📦 Building for Production
+## Building for Production
 
 ```bash
 npm run build
 ```
-
-## 🤝 Contributing
-
-Please read our [Contributing Guide](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

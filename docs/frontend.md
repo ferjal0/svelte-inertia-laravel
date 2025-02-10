@@ -2,7 +2,7 @@
 
 ## 🏗️ Frontend Architecture
 
-The frontend is built with React 18, TypeScript, and Inertia.js, providing a modern single-page application experience while maintaining the benefits of server-side rendering.
+The frontend is built with Svelte 5, TypeScript, and Inertia.js, providing a modern single-page application experience while maintaining the benefits of server-side rendering.
 
 ### Directory Structure
 
@@ -19,35 +19,27 @@ resources/js/
 
 ### Shadcn UI Integration
 
-We use Shadcn UI for consistent, accessible components. Components are installed using the CLI:
-
-```bash
-npx shadcn-ui@latest add button
-```
-
-Components are stored in `resources/js/components/ui/` and can be customized in `components.json`.
+We use Shadcn UI for consistent, accessible components. Components are installed and configured in the `components/ui` directory.
 
 ### Custom Components
 
-Custom components follow these conventions:
+Custom components using Svelte 5 Runes:
 
-```typescript
-// resources/js/components/MyComponent.tsx
-import React from 'react'
-import { cn } from '@/lib/utils'
+```svelte
+<!-- resources/js/components/MyComponent.svelte -->
+<script lang="ts">
+    import { cn } from '@/lib/utils';
 
-interface MyComponentProps {
-  className?: string
-  children: React.ReactNode
-}
+    interface $$Props {
+        className?: string;
+    }
 
-export function MyComponent({ className, children }: MyComponentProps) {
-  return (
-    <div className={cn('base-styles', className)}>
-      {children}
-    </div>
-  )
-}
+    let className = $props<$$Props>();
+</script>
+
+<div class={cn('base-styles', className)}>
+    <slot />
+</div>
 ```
 
 ## 🎯 Pages and Routing
@@ -59,27 +51,34 @@ Pages are stored in `resources/js/pages/` and follow the Laravel route structure
 ```
 pages/
 ├── Auth/
-│   ├── Login.tsx
-│   └── Register.tsx
+│   ├── Login.svelte
+│   └── Register.svelte
 ├── Dashboard/
-│   └── Index.tsx
-└── Welcome.tsx
+│   └── Index.svelte
+└── Welcome.svelte
 ```
 
-### Inertia Page Component
+### Inertia Page Component with Runes
 
-```typescript
-import { Head } from '@inertiajs/react'
-import { PageProps } from '@/types'
+```svelte
+<script lang="ts">
+    import { Head } from '@inertiajs/svelte';
+    import type { PageProps } from '@/types';
 
-export default function Dashboard({ auth }: PageProps) {
-  return (
-    <>
-      <Head title="Dashboard" />
-      <h1>Welcome {auth.user.name}</h1>
-    </>
-  )
-}
+    let auth = $props<PageProps>();
+    let count = $state(0);
+    let doubled = $derived(count * 2);
+
+    // Side effects with $effect
+    $effect(() => {
+        console.log(`Count changed to ${count}`);
+    });
+</script>
+
+<Head title="Dashboard" />
+
+<h1>Welcome {auth.user.name}</h1>
+<p>Count: {count} (Doubled: {doubled})</p>
 ```
 
 ## 📐 Layouts
@@ -88,200 +87,101 @@ export default function Dashboard({ auth }: PageProps) {
 
 Layouts are in `resources/js/layouts/` and provide consistent page structure:
 
-- `AuthenticatedLayout.tsx`: For authenticated pages
-- `GuestLayout.tsx`: For public pages
-- `AuthenticationLayout.tsx`: For auth-related pages
+- `AuthenticatedLayout.svelte`: For authenticated pages
+- `GuestLayout.svelte`: For public pages
+- `AuthenticationLayout.svelte`: For auth-related pages
 
-### Using Layouts
+### Using Layouts with Snippets (New in Svelte 5)
 
-```typescript
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout'
+```svelte
+<script lang="ts">
+    import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.svelte';
+    
+    let header = $snippet(() => (
+        <h1>Dashboard</h1>
+    ));
+</script>
 
-Dashboard.layout = (page: React.ReactNode) => (
-  <AuthenticatedLayout>{page}</AuthenticatedLayout>
-)
+<AuthenticatedLayout>
+    {header}
+    <slot />
+</AuthenticatedLayout>
 ```
-
-## 🎨 Styling with Tailwind
-
-### Configuration
-
-Tailwind is configured in `tailwind.config.js` with custom theme settings:
-
-```javascript
-module.exports = {
-  content: ['./resources/js/**/*.{js,ts,jsx,tsx}'],
-  theme: {
-    extend: {
-      colors: {
-        // Custom colors
-      }
-    }
-  },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography')
-  ]
-}
-```
-
-### CSS Organization
-
-```
-resources/css/
-├── app.css        # Main CSS file
-└── components/    # Component-specific styles
-```
-
-### Styling Best Practices
-
-1. Use Tailwind's utility classes
-2. Create component classes for reusable styles
-3. Use `@apply` for complex components
-4. Leverage Shadcn UI's built-in styling system
 
 ## 🔄 State Management
 
-### Inertia Props
+### Inertia.js Form Handling with Runes
 
-Data from the server is passed as props:
+```svelte
+<script lang="ts">
+    import { useForm } from '@inertiajs/svelte';
 
-```typescript
-interface PageProps {
-  auth: {
-    user: User
-  }
-  errors: Record<string, string>
-  flash: {
-    message?: string
-  }
-}
+    let form = $state(useForm({
+        email: '',
+        password: '',
+    }));
+
+    function submit() {
+        form.post('/login');
+    }
+</script>
+
+<form on:submit|preventDefault={submit}>
+    <input type="email" bind:value={form.email} />
+    <input type="password" bind:value={form.password} />
+    <button type="submit" disabled={form.processing}>Login</button>
+</form>
 ```
 
-### Form Handling
-
-Use Inertia's form helpers:
-
-```typescript
-import { useForm } from '@inertiajs/react'
-
-export default function UpdateProfile() {
-  const form = useForm({
-    name: '',
-    email: ''
-  })
-
-  function submit(e: React.FormEvent) {
-    e.preventDefault()
-    form.patch('/profile')
-  }
-}
-```
-
-## 📝 TypeScript Integration
+## 🎭 TypeScript Integration
 
 ### Type Definitions
 
-Common types are stored in `resources/js/types/`:
-
 ```typescript
-// types/index.d.ts
+// resources/js/types/index.ts
 export interface User {
-  id: number
-  name: string
-  email: string
-  email_verified_at: string | null
+    id: number;
+    name: string;
+    email: string;
 }
 
 export interface PageProps {
-  auth: {
-    user: User
-  }
+    auth: {
+        user: User;
+    };
 }
 ```
 
-### Type Safety
+## 🔧 Component Props with Runes
 
-- Strict mode enabled in `tsconfig.json`
-- ESLint configured for TypeScript
-- Props validation with TypeScript interfaces
+Props should be typed using TypeScript and Runes:
 
-## 🧪 Testing
+```svelte
+<script lang="ts">
+    interface $$Props {
+        title: string;
+        description?: string;
+    }
 
-### Test Setup
+    let { title, description = '' } = $props<$$Props>();
+    
+    // Derived state from props
+    let titleLength = $derived(title.length);
+</script>
 
-Tests use Jest and Testing Library:
-
-```typescript
-import { render, screen } from '@testing-library/react'
-import { Button } from './Button'
-
-describe('Button', () => {
-  it('renders correctly', () => {
-    render(<Button>Click me</Button>)
-    expect(screen.getByText('Click me')).toBeInTheDocument()
-  })
-})
+<div>
+    <h2>{title}</h2>
+    {#if description}
+        <p>{description}</p>
+    {/if}
+    <small>Title length: {titleLength}</small>
+</div>
 ```
 
-### Running Tests
+## 🔍 Key Features of Svelte 5 Runes
 
-```bash
-# Run all tests
-npm run test
-
-# Run with watch mode
-npm run test:watch
-
-# Run with coverage
-npm run test:coverage
-```
-
-## 🔍 Development Tools
-
-### VS Code Extensions
-
-Recommended extensions:
-
-- ESLint
-- Prettier
-- Tailwind CSS IntelliSense
-- TypeScript Vue Plugin
-
-### Debug Tools
-
-- React Developer Tools
-- Inertia DevTools
-
-## 🚀 Performance Optimization
-
-### Code Splitting
-
-Pages are automatically code-split. Additional splitting:
-
-```typescript
-const MyComponent = React.lazy(() => import('./MyComponent'))
-```
-
-### Image Optimization
-
-Use the optimized image component:
-
-```typescript
-import { Image } from '@/components/Image'
-
-<Image
-  src="/image.jpg"
-  alt="Description"
-  width={800}
-  height={600}
-/>
-```
-
-### Bundle Analysis
-
-Run bundle analysis:
-
-```bash
-npm run build:analyze
-```
+- **$state**: Explicit reactive state declaration
+- **$props**: Type-safe props with better TypeScript integration
+- **$derived**: Computed values that update automatically
+- **$effect**: Side effects that run when dependencies change
+- **$snippet**: New way to handle slots and template fragments

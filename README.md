@@ -2,9 +2,10 @@
 
 A modern, full-stack web application boilerplate built with Laravel 11, Inertia.js, Svelte 5 (with Runes), TypeScript, Tailwind CSS, and Shadcn UI components.
 
-![Starter Screenshots](https://github.com/user-attachments/assets/a550c79c-87eb-49a2-996b-8bb86991ec99)
+![Starter Screenshots](https://github.com/user-attachments/assets/0e06b0b9-36bb-4e0d-acb7-b192dbde299d)
 
 ## Features
+
 
 - **Modern Svelte 5 with Runes**
     - Explicit reactivity with `$state`, `$derived`, and `$effect`

@@ -6,6 +6,7 @@ import eslintPluginSvelte from 'eslint-plugin-svelte';
 import svelteParser from 'svelte-eslint-parser';
 
 export default [
+    { ignores: ['dist', 'node_modules', 'vendor', 'public', 'bootstrap'] },
     {
         files: ['**/*.{js,ts}'],
         ...eslint.configs.recommended,

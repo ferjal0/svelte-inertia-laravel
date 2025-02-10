@@ -1,0 +1,59 @@
+# Dependencies
+/node_modules
+/vendor
+
+# Build outputs
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/bootstrap/ssr
+/bootstrap/cache
+
+# Environment and config files
+.env
+.env.*
+*.config.js
+*.config.ts
+
+# IDE and editor files
+/.idea
+/.vscode
+/.fleet
+/.nova
+/.zed
+
+# Cache and logs
+.phpunit.result.cache
+.phpunit.cache
+.phpactor.json
+npm-debug.log
+yarn-error.log
+*.log
+
+# Generated files
+/_ide_helper.php
+/.phpstorm.meta.php
+/composer.lock
+/package-lock.json
+/yarn.lock
+/pnpm-lock.yaml
+
+# Laravel specific
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+/storage/app/*
+
+# Compiled assets
+*.css.map
+*.js.map
+
+# Test coverage
+/coverage
+/tests/coverage
+
+# Misc
+.DS_Store
+Thumbs.db

@@ -14,9 +14,10 @@
     "scripts": {
         "build": "vite build && vite build --ssr",
         "dev": "vite",
-        "lint": "eslint resources/js --fix",
-        "format": "prettier --write resources/js",
-        "check": "svelte-check --tsconfig ./tsconfig.json"
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
     },
     "dependencies": {
         "@inertiajs/svelte": "^2.0.3",

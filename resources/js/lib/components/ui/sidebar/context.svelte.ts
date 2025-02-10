@@ -1,8 +1,25 @@
 import { IsMobile } from '$lib/hooks/is-mobile.svelte.js';
 import { getContext, setContext } from 'svelte';
-import { SIDEBAR_KEYBOARD_SHORTCUT } from './constants.js';
+import {
+    SIDEBAR_COOKIE_MAX_AGE,
+    SIDEBAR_COOKIE_NAME,
+    SIDEBAR_KEYBOARD_SHORTCUT,
+} from './constants.js';
 
 type Getter<T> = () => T;
+
+function setCookie(name: string, value: string, maxAge: number) {
+    if (typeof document === 'undefined') return;
+    document.cookie = `${name}=${value};path=/;max-age=${maxAge}`;
+}
+
+function getCookie(name: string): string | null {
+    if (typeof document === 'undefined') return null;
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()?.split(';').shift() ?? null;
+    return null;
+}
 
 export type SidebarStateProps = {
     /**
@@ -29,9 +46,24 @@ class SidebarState {
     state = $derived.by(() => (this.open ? 'expanded' : 'collapsed'));
 
     constructor(props: SidebarStateProps) {
-        this.setOpen = props.setOpen;
-        this.#isMobile = new IsMobile();
         this.props = props;
+        this.#isMobile = new IsMobile();
+
+        // Wrap the setOpen function to persist state in cookie
+        this.setOpen = (open: boolean) => {
+            setCookie(
+                SIDEBAR_COOKIE_NAME,
+                open.toString(),
+                SIDEBAR_COOKIE_MAX_AGE,
+            );
+            props.setOpen(open);
+        };
+
+        // Initialize from cookie if available
+        const stored = getCookie(SIDEBAR_COOKIE_NAME);
+        if (stored !== null) {
+            props.setOpen(stored === 'true');
+        }
     }
 
     // Convenience getter for checking if the sidebar is mobile

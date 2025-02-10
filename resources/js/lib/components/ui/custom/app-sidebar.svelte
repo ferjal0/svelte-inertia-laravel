@@ -1,19 +1,26 @@
 <script lang="ts">
-    import {
-        BookOpen,
-        Command,
-        GalleryVerticalEnd,
-        LayoutDashboard,
-        LifeBuoy,
-        Send,
-    } from 'lucide-svelte';
+    import { LayoutDashboard, LifeBuoy, Send, Shell } from 'lucide-svelte';
     import type { Icon } from 'lucide-svelte';
     import NavMain from '$lib/components/ui/custom/nav-main.svelte';
     import NavProjectMembers from '$lib/components/ui/custom/nav-project-members.svelte';
     import NavSecondary from '$lib/components/ui/custom/nav-secondary.svelte';
     import NavUser from '$lib/components/ui/custom/nav-user.svelte';
     import * as Sidebar from '$lib/components/ui/sidebar';
-    import { Link } from '@inertiajs/svelte';
+    import ProjectSwitcher from './project-switcher.svelte';
+
+    type Project = {
+        logo: typeof Icon;
+        title: string;
+        subtitle: string;
+    };
+
+    const projects: Project[] = [
+        {
+            logo: Shell,
+            title: 'Starter',
+            subtitle: 'Svelte - Inertia - Laravel',
+        },
+    ];
 
     type MainNavigationItem = {
         title: string;
@@ -30,48 +37,6 @@
             title: 'Dashboard',
             url: '/dashboard',
             icon: LayoutDashboard,
-        },
-        {
-            title: 'Projects',
-            url: '/dashboard',
-            icon: GalleryVerticalEnd,
-            items: [
-                {
-                    title: 'Board',
-                    url: '/dashboard',
-                },
-                {
-                    title: 'Tasks',
-                    url: '/dashboard',
-                },
-                {
-                    title: 'Reports',
-                    url: '/dashboard',
-                },
-            ],
-        },
-        {
-            title: 'Documentation',
-            url: '/dashboard',
-            icon: BookOpen,
-            items: [
-                {
-                    title: 'Getting Started',
-                    url: '/dashboard',
-                },
-                {
-                    title: 'Backend Setup',
-                    url: '/dashboard',
-                },
-                {
-                    title: 'Frontend Setup',
-                    url: '/dashboard',
-                },
-                {
-                    title: 'Changelog',
-                    url: '/dashboard',
-                },
-            ],
         },
     ];
 
@@ -119,33 +84,9 @@
     ];
 </script>
 
-<Sidebar.Root variant="inset" collapsible="offcanvas">
+<Sidebar.Root variant="inset" collapsible="icon">
     <Sidebar.Header>
-        <Sidebar.Menu>
-            <Sidebar.MenuItem>
-                <Sidebar.MenuButton size="lg">
-                    {#snippet child({ props })}
-                        <Link href="/dashboard" {...props}>
-                            <div
-                                class="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg"
-                            >
-                                <Command class="size-4" />
-                            </div>
-                            <div
-                                class="grid flex-1 text-left text-sm leading-tight"
-                            >
-                                <span class="truncate font-semibold"
-                                    >Starter</span
-                                >
-                                <span class="truncate text-xs"
-                                    >Svelte - Inertia - Laravel</span
-                                >
-                            </div>
-                        </Link>
-                    {/snippet}
-                </Sidebar.MenuButton>
-            </Sidebar.MenuItem>
-        </Sidebar.Menu>
+        <ProjectSwitcher {projects} />
     </Sidebar.Header>
     <Sidebar.Content>
         <NavMain items={navMain} />

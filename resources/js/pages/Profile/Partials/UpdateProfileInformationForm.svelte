@@ -43,7 +43,6 @@
         }
 
         $form.post(route('profile.update'), {
-            preserveScroll: true,
             onSuccess: () => {
                 toast.success('Profile updated successfully');
                 clearPhotoFileInput();

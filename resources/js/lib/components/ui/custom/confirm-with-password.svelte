@@ -8,7 +8,7 @@
     import axios from 'axios';
 
     interface ConfirmWithPasswordProps {
-        onConfirm: (password: string) => Promise<void>;
+        onConfirm: (password: string) => void;
         title?: string;
         description?: string;
         children?: Snippet;
@@ -44,9 +44,13 @@
             });
             closeModal();
             onConfirm(password);
-        } catch (e) {
+        } catch (e: unknown) {
             processing = false;
-            error = e.response.data.message;
+            if (axios.isAxiosError(e) && e.response) {
+                error = e.response.data.message;
+            } else {
+                error = 'An unexpected error occurred';
+            }
         }
     }
 

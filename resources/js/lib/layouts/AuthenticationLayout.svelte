@@ -19,7 +19,7 @@
                 >
                     <Command class="size-4" />
                 </div>
-                Svelte Inertia
+                Svelte Inertia Laravel
             </Link>
         </div>
         <div class="flex flex-1 items-center justify-center">

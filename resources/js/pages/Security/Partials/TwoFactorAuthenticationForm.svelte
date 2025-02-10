@@ -2,7 +2,6 @@
     import ConfirmWithPassword from '$lib/components/ui/custom/confirm-with-password.svelte';
     import { Button } from '$lib/components/ui/button';
     import ErrorFeedback from '$lib/components/ui/custom/error-feedback.svelte';
-    import { Input } from '$lib/components/ui/input';
     import { Label } from '$lib/components/ui/label';
     import type { PageProps } from '$lib/types';
     import { page } from '@inertiajs/svelte';
@@ -10,6 +9,7 @@
     import axios from 'axios';
     import { CheckCircle, Siren } from 'lucide-svelte';
     import { toast } from 'svelte-sonner';
+    import * as InputOTP from '$lib/components/ui/input-otp';
 
     // State
     let enabling = $state(false);
@@ -50,7 +50,9 @@
             });
     }
 
-    function confirmTwoFactorAuthentication() {
+    function confirmTwoFactorAuthentication(e: SubmitEvent) {
+        e.preventDefault();
+
         $form.post(route('two-factor.confirm'), {
             errorBag: 'confirmTwoFactorAuthentication',
             preserveScroll: true,
@@ -122,8 +124,8 @@
             </div>
             <ConfirmWithPassword
                 title="Enable 2FA"
-                content="To start enabling two-factor authentication, you must confirm your password."
-                onConfirmed={enableTwoFactorAuthentication}
+                description="To start enabling two-factor authentication, you must confirm your password."
+                onConfirm={enableTwoFactorAuthentication}
             >
                 <Button type="button" disabled={enabling}>
                     {enabling ? 'Enabling...' : 'Enable'}
@@ -134,7 +136,9 @@
 
     {#if qrCode}
         <div class="flex flex-col gap-6">
-            <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
+            <p
+                class="text-sm font-medium text-balance text-gray-900 dark:text-gray-100"
+            >
                 To finish enabling two factor authentication, scan the following
                 QR code using your phone's authenticator application or enter
                 the setup key and provide the generated OTP code.
@@ -143,31 +147,33 @@
             <div class="contrast-200">{@html qrCode}</div>
 
             <div class="flex flex-col gap-2">
-                <Label for="code">Code</Label>
+                <form onsubmit={confirmTwoFactorAuthentication}>
+                    <Label for="code">Code</Label>
 
-                <div class="flex flex-col gap-2">
-                    <div class="flex gap-2">
-                        <Input
-                            id="code"
-                            type="text"
-                            name="code"
-                            class="block"
-                            value={$form.code}
-                            onchange={(e) =>
-                                ($form.code = e.currentTarget.value)}
-                        />
+                    <div class="flex flex-col gap-2">
+                        <div class="flex gap-2">
+                            <InputOTP.Root
+                                bind:value={$form.code}
+                                maxlength={6}
+                                autofocus
+                            >
+                                {#snippet children({ cells })}
+                                    <InputOTP.Group>
+                                        {#each cells as cell}
+                                            <InputOTP.Slot {cell} />
+                                        {/each}
+                                    </InputOTP.Group>
+                                {/snippet}
+                            </InputOTP.Root>
 
-                        <Button
-                            type="button"
-                            onclick={confirmTwoFactorAuthentication}
-                            disabled={$form.processing}
-                        >
-                            {$form.processing ? 'Confirming...' : 'Confirm'}
-                        </Button>
+                            <Button type="submit" disabled={$form.processing}>
+                                {$form.processing ? 'Confirming...' : 'Confirm'}
+                            </Button>
+                        </div>
+
+                        <ErrorFeedback message={$form.errors.code} />
                     </div>
-
-                    <ErrorFeedback message={$form.errors.code} />
-                </div>
+                </form>
             </div>
         </div>
     {/if}
@@ -204,8 +210,8 @@
             <div class="flex gap-4">
                 <ConfirmWithPassword
                     title="Disable 2FA"
-                    content="To disable two-factor authentication, you must confirm your password."
-                    onConfirmed={disableTwoFactorAuthentication}
+                    description="To disable two-factor authentication, you must confirm your password."
+                    onConfirm={disableTwoFactorAuthentication}
                 >
                     <Button type="button" disabled={disabling}>
                         {disabling ? 'Disabling...' : 'Disable'}

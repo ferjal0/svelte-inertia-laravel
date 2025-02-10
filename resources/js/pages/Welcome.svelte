@@ -22,7 +22,7 @@
                 >
                     <Command class="size-4" />
                 </div>
-                Svelte Inertia
+                Svelte Inertia Laravel
             </Link>
 
             <nav class="flex items-center gap-4">

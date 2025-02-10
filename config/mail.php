@@ -50,7 +50,7 @@ return [
         ],
 
         'mailtrap' => [
-            'transport' => 'mailtrap'
+            'transport' => 'mailtrap',
         ],
 
         'ses' => [

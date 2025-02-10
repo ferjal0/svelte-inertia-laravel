@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\UploadedFile;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -81,13 +81,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * Get the URL to the user's profile photo.
-     *
-     * @return string
      */
     public function getProfilePhotoUrlAttribute(): string
     {
         return $this->profile_photo_path
-            ? asset('storage/' . $this->profile_photo_path)
+            ? asset('storage/'.$this->profile_photo_path)
             : '';
     }
 }

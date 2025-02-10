@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Http\Request;
 
 class SessionController extends Controller
 {
@@ -59,7 +58,7 @@ class SessionController extends Controller
             ->where('id', $id)
             ->first();
 
-        if (!$session) {
+        if (! $session) {
             throw ValidationException::withMessages([
                 'session' => ['Session not found or does not belong to you'],
             ]);

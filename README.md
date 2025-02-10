@@ -67,8 +67,8 @@ This project implements a modern monolithic architecture using Laravel as the ba
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/ferjal0/react-inertia-laravel
-cd react-inertia-laravel
+git clone https://github.com/ferjal0/svelte-inertia-laravel
+cd svelte-inertia-laravel
 ```
 
 2. Install PHP dependencies:
@@ -102,7 +102,7 @@ php artisan migrate
 npm run dev
 ```
 
-Visit `http://react-inertia-laravel.test` to see your application.
+Visit `http://svelte-inertia-laravel.test` to see your application.
 
 ## Documentation Structure
 

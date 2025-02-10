@@ -4,7 +4,6 @@
         "allowJs": true,
         "module": "ESNext",
         "moduleResolution": "bundler",
-        "jsx": "react-jsx",
         "strict": true,
         "isolatedModules": true,
         "target": "ESNext",

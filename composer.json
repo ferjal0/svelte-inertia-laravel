@@ -1,12 +1,12 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "ferjal0/laravel-inertia-react-starter",
+    "name": "ferjal0/laravel-inertia-svelte-starter",
     "type": "project",
-    "description": "The Laravel Inertia React Starter",
+    "description": "The Laravel Inertia Svelte Starter",
     "keywords": [
         "laravel",
         "inertia",
-        "react",
+        "svelte",
         "shadcn-ui"
     ],
     "license": "MIT",

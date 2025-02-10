@@ -96,10 +96,8 @@ Layouts are in `resources/js/layouts/` and provide consistent page structure:
 ```svelte
 <script lang="ts">
     import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.svelte';
-    
-    let header = $snippet(() => (
-        <h1>Dashboard</h1>
-    ));
+
+    let header = $snippet(() => <h1>Dashboard</h1>);
 </script>
 
 <AuthenticatedLayout>
@@ -116,10 +114,12 @@ Layouts are in `resources/js/layouts/` and provide consistent page structure:
 <script lang="ts">
     import { useForm } from '@inertiajs/svelte';
 
-    let form = $state(useForm({
-        email: '',
-        password: '',
-    }));
+    let form = $state(
+        useForm({
+            email: '',
+            password: '',
+        }),
+    );
 
     function submit() {
         form.post('/login');
@@ -164,7 +164,7 @@ Props should be typed using TypeScript and Runes:
     }
 
     let { title, description = '' } = $props<$$Props>();
-    
+
     // Derived state from props
     let titleLength = $derived(title.length);
 </script>

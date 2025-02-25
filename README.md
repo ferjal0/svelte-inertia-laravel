@@ -1,18 +1,17 @@
 # Svelte Inertia Laravel - Project Starter
 
-A modern, full-stack web application boilerplate built with Laravel 11, Inertia.js, Svelte 5 (with Runes), TypeScript, Tailwind CSS, and Shadcn UI components.
+A modern, full-stack web application boilerplate built with Laravel 12, Inertia.js, Svelte 5 (with Runes), TypeScript, Tailwind CSS, and Shadcn UI components.
 
 ![Starter Screenshots](https://github.com/user-attachments/assets/0e06b0b9-36bb-4e0d-acb7-b192dbde299d)
 
 ## Features
-
 
 - **Modern Svelte 5 with Runes**
     - Explicit reactivity with `$state`, `$derived`, and `$effect`
     - Type-safe props with `$props`
     - Improved component composition with `$snippet`
 - **Full-Stack Integration**
-    - Laravel 11 backend with robust authentication via Fortify
+    - Laravel 12 backend with robust authentication via Fortify
     - Seamless frontend-backend communication with Inertia.js
     - Server-side rendering for optimal performance
 - **Developer Experience**
@@ -36,7 +35,7 @@ This project implements a modern monolithic architecture using Laravel as the ba
 
 - **Backend**
 
-    - Laravel 11.x (PHP 8.x)
+    - Laravel 12.x (PHP 8.x)
     - Laravel Fortify for Auth features
     - SQLite
 

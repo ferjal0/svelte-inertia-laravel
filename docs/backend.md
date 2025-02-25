@@ -2,7 +2,7 @@
 
 ## 🏗️ Backend Architecture
 
-The backend of this application is built with Laravel 11, following modern best practices and design patterns.
+The backend of this application is built with Laravel 12, following modern best practices and design patterns.
 
 ### Directory Structure
 

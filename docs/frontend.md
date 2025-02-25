@@ -46,15 +46,15 @@ Custom components using Svelte 5 Runes:
 
 ### Page Structure
 
-Pages are stored in `resources/js/pages/` and follow the Laravel route structure:
+Pages are stored in `resources/js/Pages/` and follow the Laravel route structure:
 
-```
-pages/
+```markdown
+Pages/
 ├── Auth/
-│   ├── Login.svelte
-│   └── Register.svelte
+│ ├── Login.svelte
+│ └── Register.svelte
 ├── Dashboard/
-│   └── Index.svelte
+│ └── Index.svelte
 └── Welcome.svelte
 ```
 

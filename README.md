@@ -79,7 +79,7 @@ composer install
 3. Install Node.js dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 4. Set up your environment:
@@ -98,7 +98,7 @@ php artisan migrate
 6. Start the development servers:
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 Visit `http://svelte-inertia-laravel.test` to see your application.
@@ -122,11 +122,11 @@ The documentation is split into three main sections:
 ./vendor/bin/pint
 
 # TypeScript/Svelte
-npm run lint
+pnpm run lint
 ```
 
 ## Building for Production
 
 ```bash
-npm run build
+pnpm run build
 ```

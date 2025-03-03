@@ -28,7 +28,7 @@ composer install
 3. **Install Node.js Dependencies**
 
 ```bash
-npm install
+pnpm install
 ```
 
 4. **Environment Setup**
@@ -50,7 +50,7 @@ php artisan migrate
 7. **Build Assets**
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ## 🏃‍♂️ Development Workflow
@@ -58,7 +58,7 @@ npm run dev
 ### Start the Development Server
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 Your application will be available at `http://svelte-inertia-laravel.test` (if using Laravel Herd).
@@ -73,16 +73,16 @@ php artisan test
 ./vendor/bin/pint
 
 # Type check TypeScript and Svelte files
-npm run check
+pnpm run check
 
 # Svelte check (includes Runes validation)
-npm run check:svelte
+pnpm run check:svelte
 
 # Lint JavaScript/TypeScript/Svelte
-npm run lint
+pnpm run lint
 
 # Format JavaScript/TypeScript/Svelte
-npm run format
+pnpm run format
 ```
 
 ## 📦 Production Deployment
@@ -96,7 +96,7 @@ composer install --optimize-autoloader --no-dev
 2. **Build Frontend Assets**
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 3. **Cache Configuration**
@@ -130,7 +130,7 @@ If HMR is not working:
 
 ### TypeScript Errors
 
-Run `npm run check` to identify type issues. Common fixes:
+Run `pnpm run check` to identify type issues. Common fixes:
 
 - Ensure proper type definitions in `resources/js/types`
 - Check for missing type imports

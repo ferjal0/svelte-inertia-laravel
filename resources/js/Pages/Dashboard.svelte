@@ -14,7 +14,7 @@
             <div class="aspect-video rounded-xl bg-sidebar"></div>
         </div>
         <div
-            class="min-h-[100vh] flex-1 rounded-xl bg-sidebar md:min-h-min"
+            class="min-h-screen flex-1 rounded-xl bg-sidebar md:min-h-min"
         ></div>
     </div>
 </AuthenticatedLayout>

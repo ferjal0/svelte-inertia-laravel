@@ -44,7 +44,7 @@
                 {/snippet}
             </DropdownMenu.Trigger>
             <DropdownMenu.Content
-                class="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+                class="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
                 align="start"
                 side={isMobile ? 'bottom' : 'right'}
                 sideOffset={4}

@@ -4,7 +4,7 @@
 </script>
 
 <div
-    class="absolute inset-0 flex items-center justify-center [mask-image:linear-gradient(to_bottom,white,transparent)]"
+    class="absolute inset-0 flex items-center justify-center mask-[linear-gradient(to_bottom,white,transparent)]"
 >
     {#each { length: 8 } as iteration, i}
         <div

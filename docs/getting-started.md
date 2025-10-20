@@ -141,24 +141,24 @@ Run `pnpm run check` to identify type issues. Common fixes:
 Common issues with Runes and their solutions:
 
 1. **State Not Updating**
-   - Ensure you're using `$state` for reactive variables
-   - Check that you're modifying the state directly, not through object methods
+    - Ensure you're using `$state` for reactive variables
+    - Check that you're modifying the state directly, not through object methods
 
 2. **Props Type Errors**
-   - Use `$props<T>()` for type-safe props
-   - Ensure your interface extends `$$Props` if needed
+    - Use `$props<T>()` for type-safe props
+    - Ensure your interface extends `$$Props` if needed
 
 3. **Derived Values Not Updating**
-   - Make sure all dependencies are reactive (`$state` or `$props`)
-   - Verify the computation doesn't have side effects
+    - Make sure all dependencies are reactive (`$state` or `$props`)
+    - Verify the computation doesn't have side effects
 
 4. **Effects Not Running**
-   - Check that dependencies are actually changing
-   - Ensure you're not mutating state inside effects
+    - Check that dependencies are actually changing
+    - Ensure you're not mutating state inside effects
 
 5. **Snippet Rendering Issues**
-   - Verify correct JSX syntax in snippets
-   - Check that all variables used in snippets are in scope
+    - Verify correct JSX syntax in snippets
+    - Check that all variables used in snippets are in scope
 
 ## 🔒 Type Safety
 

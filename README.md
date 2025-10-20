@@ -34,13 +34,11 @@ This project implements a modern monolithic architecture using Laravel as the ba
 ### Tech Stack
 
 - **Backend**
-
     - Laravel 12.x (PHP 8.x)
     - Laravel Fortify for Auth features
     - SQLite
 
 - **Frontend**
-
     - Svelte 5.19.7 with Runes
     - TypeScript 5.7.3
     - Vite 6.0.11

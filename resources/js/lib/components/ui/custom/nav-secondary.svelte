@@ -1,7 +1,7 @@
 <script lang="ts">
     import * as Sidebar from '$lib/components/ui/sidebar';
     import { Link } from '@inertiajs/svelte';
-    import type { Icon } from 'lucide-svelte';
+    import type { Icon } from '@lucide/svelte';
 
     interface NavSecondaryProps {
         items: {

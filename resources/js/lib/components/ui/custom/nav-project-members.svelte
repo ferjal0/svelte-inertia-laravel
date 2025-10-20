@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Ellipsis, Folder, Share, Trash2 } from 'lucide-svelte';
+    import { Ellipsis, Folder, Share, Trash2 } from '@lucide/svelte';
     import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
     import * as Sidebar from '$lib/components/ui/sidebar';
     import { useSidebar } from '$lib/components/ui/sidebar';

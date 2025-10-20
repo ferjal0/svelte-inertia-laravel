@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { LayoutDashboard, LifeBuoy, Send, Shell } from 'lucide-svelte';
-    import type { Icon } from 'lucide-svelte';
+    import { LayoutDashboard, LifeBuoy, Send, Shell } from '@lucide/svelte';
+    import type { Icon } from '@lucide/svelte';
     import NavMain from '$lib/components/ui/custom/nav-main.svelte';
     import NavProjectMembers from '$lib/components/ui/custom/nav-project-members.svelte';
     import NavSecondary from '$lib/components/ui/custom/nav-secondary.svelte';

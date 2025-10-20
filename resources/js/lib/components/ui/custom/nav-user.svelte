@@ -10,7 +10,7 @@
         PaintRoller,
         Sparkles,
         Sun,
-    } from 'lucide-svelte';
+    } from '@lucide/svelte';
     import * as Avatar from '$lib/components/ui/avatar';
     import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
     import * as Sidebar from '$lib/components/ui/sidebar';

@@ -4,7 +4,7 @@
     import { Input } from '$lib/components/ui/input';
     import { Label } from '$lib/components/ui/label';
     import { useForm } from '@inertiajs/svelte';
-    import { Loader2 } from 'lucide-svelte';
+    import { Loader2 } from '@lucide/svelte';
 
     type Props = {
         className?: string;

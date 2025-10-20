@@ -7,7 +7,7 @@
     import { Label } from '$lib/components/ui/label';
     import { page } from '@inertiajs/svelte';
     import { useForm } from '@inertiajs/svelte';
-    import { Pencil } from 'lucide-svelte';
+    import { Pencil } from '@lucide/svelte';
     import { toast } from 'svelte-sonner';
 
     type Props = {

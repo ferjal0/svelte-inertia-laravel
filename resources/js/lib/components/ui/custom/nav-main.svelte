@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { ChevronRight, type Icon } from 'lucide-svelte';
+    import { ChevronRight, type Icon } from '@lucide/svelte';
     import * as Collapsible from '$lib/components/ui/collapsible';
     import * as Sidebar from '$lib/components/ui/sidebar';
     import { Link } from '@inertiajs/svelte';

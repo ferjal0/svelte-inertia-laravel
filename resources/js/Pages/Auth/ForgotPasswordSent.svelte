@@ -2,7 +2,7 @@
     import { Button } from '$lib/components/ui/button';
     import AuthenticationLayout from '$lib/layouts/AuthenticationLayout.svelte';
     import { Link } from '@inertiajs/svelte';
-    import { MailOpen } from 'lucide-svelte';
+    import { MailOpen } from '@lucide/svelte';
 </script>
 
 <svelte:head>

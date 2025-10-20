@@ -7,7 +7,7 @@
     import { page } from '@inertiajs/svelte';
     import { useForm } from '@inertiajs/svelte';
     import axios from 'axios';
-    import { CheckCircle, Siren } from 'lucide-svelte';
+    import { CheckCircle, Siren } from '@lucide/svelte';
     import { toast } from 'svelte-sonner';
     import * as InputOTP from '$lib/components/ui/input-otp';
 

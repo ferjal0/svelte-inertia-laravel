@@ -1,7 +1,7 @@
 <script lang="ts">
     import * as Sidebar from '$lib/components/ui/sidebar';
     import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
-    import { ChevronsUpDown, type Icon, Plus } from 'lucide-svelte';
+    import { ChevronsUpDown, type Icon, Plus } from '@lucide/svelte';
 
     interface Project {
         logo: typeof Icon;

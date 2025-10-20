@@ -3,7 +3,7 @@
     import * as InputOTP from '$lib/components/ui/input-otp';
     import AuthenticationLayout from '$lib/layouts/AuthenticationLayout.svelte';
     import { useForm } from '@inertiajs/svelte';
-    import { ShieldCheck } from 'lucide-svelte';
+    import { ShieldCheck } from '@lucide/svelte';
 
     const form = useForm<{ code: string; processing: boolean }>({
         code: '',

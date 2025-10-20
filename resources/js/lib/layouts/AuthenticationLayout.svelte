@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Link } from '@inertiajs/svelte';
-    import { Command } from 'lucide-svelte';
+    import { Command } from '@lucide/svelte';
     import type { Snippet } from 'svelte';
 
     type Props = {

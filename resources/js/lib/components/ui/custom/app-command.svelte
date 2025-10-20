@@ -16,7 +16,7 @@
         Lock,
         Moon,
         Sun,
-    } from 'lucide-svelte';
+    } from '@lucide/svelte';
     import { onMount } from 'svelte';
     import { setMode } from 'mode-watcher';
 

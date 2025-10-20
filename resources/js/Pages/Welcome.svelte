@@ -2,7 +2,7 @@
     import Ripple from '$lib/components/ui/custom/ripple.svelte';
     import type { PageProps } from '$lib/types';
     import { Link } from '@inertiajs/svelte';
-    import { Command } from 'lucide-svelte';
+    import { Command } from '@lucide/svelte';
 
     let { auth } = $props() as PageProps;
 </script>

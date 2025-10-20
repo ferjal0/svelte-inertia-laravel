@@ -53,6 +53,27 @@ php artisan migrate
 pnpm run dev
 ```
 
+## 🌀 Tailwind CSS 4 (Zero‑Config)
+
+Tailwind v4 is already wired with `@tailwindcss/vite` and `@tailwindcss/postcss`, so utilities work out of the box. Add the standard directives to your CSS entry or component styles and you’re good to go:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+Migrating from v3? You likely don’t need a `tailwind.config.*` unless you need advanced customization.
+
+## ⚡ Vite 7
+
+This starter uses Vite 7 for a fast, reliable dev experience.
+
+```bash
+pnpm run dev   # start the dev server
+pnpm run build # build client + SSR
+```
+
 ## 🏃‍♂️ Development Workflow
 
 ### Start the Development Server
@@ -85,48 +106,13 @@ pnpm run lint
 pnpm run format
 ```
 
-## 📦 Production Deployment
-
-1. **Optimize Composer**
-
-```bash
-composer install --optimize-autoloader --no-dev
-```
-
-2. **Build Frontend Assets**
-
-```bash
-pnpm run build
-```
-
-3. **Cache Configuration**
-
-```bash
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-```
-
-## 🔧 IDE Setup
-
-For the best development experience, we recommend:
-
-- VS Code with these extensions:
-    - Svelte for VS Code (with Svelte 5 support)
-    - TypeScript and JavaScript Language Features
-    - Tailwind CSS IntelliSense
-    - ESLint
-    - Prettier
-
-## 🐛 Common Issues
-
 ### Hot Module Replacement (HMR)
 
 If HMR is not working:
 
 1. Clear your browser cache
-2. Restart Vite development server
-3. Check your `vite.config.js` configuration
+2. Restart the Vite 7 development server
+3. Check your Vite config and plugins (e.g. `@sveltejs/vite-plugin-svelte`, `@tailwindcss/vite`)
 
 ### TypeScript Errors
 

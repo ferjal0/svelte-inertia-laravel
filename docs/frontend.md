@@ -42,6 +42,28 @@ Custom components using Svelte 5 Runes:
 </div>
 ```
 
+## 🌀 Tailwind CSS 4
+
+- Tailwind v4 is zero-config by default. This starter includes `@tailwindcss/vite` and `@tailwindcss/postcss` so utilities are available out of the box.
+- Add styles in your Svelte components or a global CSS entry using the standard directives:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+If you're migrating, remove old `tailwind.config.*` files unless you need advanced customization.
+
+## ⚡ Vite 7
+
+- Dev server is faster and more reliable. Use the usual commands:
+
+```bash
+pnpm run dev   # start Vite 7
+pnpm run build # build client + SSR
+```
+
 ## 🎯 Pages and Routing
 
 ### Page Structure

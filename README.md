@@ -1,6 +1,6 @@
 # Svelte Inertia Laravel - Project Starter
 
-A modern, full-stack web application boilerplate built with Laravel 12, Inertia.js, Svelte 5 (with Runes), TypeScript, Tailwind CSS, and Shadcn UI components.
+A modern, full-stack web application boilerplate built with Laravel 12, Inertia.js, Svelte 5 (with Runes), TypeScript, Tailwind CSS 4, and Shadcn UI components — powered by Vite 7 for a fast DX.
 
 ![Starter Screenshots](https://github.com/user-attachments/assets/0e06b0b9-36bb-4e0d-acb7-b192dbde299d)
 
@@ -17,7 +17,7 @@ A modern, full-stack web application boilerplate built with Laravel 12, Inertia.
 - **Developer Experience**
     - Hot Module Replacement (HMR) and fast refresh
     - TypeScript with strict type checking
-    - Modern UI powered by Tailwind CSS and Shadcn
+    - Modern UI powered by Tailwind CSS 4 and Shadcn
     - Comprehensive ESLint and Prettier configuration
 
 ## Architecture Overview
@@ -27,7 +27,7 @@ This project implements a modern monolithic architecture using Laravel as the ba
 - **Single Codebase**: All code lives in one repository, simplifying deployment and maintenance
 - **Modern Reactivity**: Svelte 5's Runes system for explicit and powerful state management
 - **Type Safety**: Full TypeScript support with improved type inference
-- **Modern UI**: Powered by Tailwind CSS and Shadcn components
+- **Modern UI**: Powered by Tailwind CSS 4 and Shadcn components
 - **Authentication**: Built-in auth system using Laravel Fortify
 - **Developer Experience**: Enhanced development workflow with Runes and TypeScript
 
@@ -39,10 +39,10 @@ This project implements a modern monolithic architecture using Laravel as the ba
     - SQLite
 
 - **Frontend**
-    - Svelte 5.19.7 with Runes
-    - TypeScript 5.7.3
-    - Vite 6.0.11
-    - Tailwind CSS
+    - Svelte 5 with Runes
+    - TypeScript 5.x
+    - Vite 7.x
+    - Tailwind CSS 4.x
     - Shadcn UI Components
     - Lucide Svelte Icons
 
@@ -100,6 +100,16 @@ pnpm run dev
 ```
 
 Visit `http://svelte-inertia-laravel.test` to see your application.
+
+## Tailwind CSS 4 + Vite 7
+
+- **Tailwind 4**: Zero-config by default. The starter already includes `@tailwindcss/vite` and `@tailwindcss/postcss` so `@tailwind base; @tailwind components; @tailwind utilities;` Just Works.
+- **Vite 7**: Faster HMR and improved SSR build. No action needed — scripts are wired up for dev and build.
+- If you're migrating an older clone, update your local deps:
+
+```bash
+pnpm install
+```
 
 ## Documentation Structure
 

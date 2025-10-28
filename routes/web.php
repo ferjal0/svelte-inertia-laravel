@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Account\ProfileController;
 use App\Http\Controllers\Account\SecurityController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,6 +29,13 @@ Route::middleware('auth', 'verified')->group(function () {
 
     // Security
     Route::get('/account/security', [SecurityController::class, 'show'])->name('security.show');
+
+    // Admin routes - protected by role middleware
+    Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::post('/users/{user}/role', [UserController::class, 'updateRole'])->name('users.role.update');
+        Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    });
 });
 
 require __DIR__.'/auth.php';

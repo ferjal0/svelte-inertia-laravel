@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Badge } from '$lib/components/ui/badge/index.js';
+    import { ShieldIcon, UserIcon } from '@lucide/svelte';
     import type { Role } from '../columns.js';
 
     let { roles }: { roles: Role[] } = $props();
@@ -14,6 +15,17 @@
                 return 'zinc';
         }
     }
+
+    function getRoleIcon(roleSlug: string) {
+        switch (roleSlug) {
+            case 'admin':
+                return ShieldIcon;
+            case 'user':
+                return UserIcon;
+            default:
+                return UserIcon;
+        }
+    }
 </script>
 
 {#if roles.length === 0}
@@ -21,7 +33,10 @@
 {:else}
     <div class="flex items-center gap-2">
         {#each roles as role (role.id)}
-            <Badge variant={getRoleBadgeVariant(role.slug)}>
+            <Badge
+                variant={getRoleBadgeVariant(role.slug)}
+                icon={getRoleIcon(role.slug)}
+            >
                 {role.name}
             </Badge>
         {/each}

@@ -2,7 +2,7 @@
     import { type VariantProps, tv } from 'tailwind-variants';
 
     export const badgeVariants = tv({
-        base: 'inline-flex w-fit shrink-0 items-center justify-center gap-1.5 overflow-hidden whitespace-nowrap rounded-md px-1.5 py-0.5 text-xs font-medium transition-colors sm:text-xs [&>svg]:pointer-events-none [&>svg]:size-3',
+        base: 'inline-flex w-fit shrink-0 items-center justify-center gap-1 overflow-hidden whitespace-nowrap rounded-md px-1.5 py-0.5 text-xs font-medium transition-colors sm:text-xs [&>svg]:pointer-events-none [&>svg]:size-3 tracking-tight',
         variants: {
             variant: {
                 // Original shadcn variants
@@ -48,6 +48,7 @@
 
 <script lang="ts">
     import type { HTMLAnchorAttributes } from 'svelte/elements';
+    import type { Component } from 'svelte';
     import { cn, type WithElementRef } from '$lib/utils.js';
 
     let {
@@ -55,10 +56,12 @@
         href,
         class: className,
         variant = 'default',
+        icon,
         children,
         ...restProps
     }: WithElementRef<HTMLAnchorAttributes> & {
         variant?: BadgeVariant;
+        icon?: Component;
     } = $props();
 </script>
 
@@ -70,5 +73,9 @@
     class={cn(badgeVariants({ variant }), className)}
     {...restProps}
 >
+    {#if icon}
+        {@const Icon = icon}
+        <Icon class="size-3" />
+    {/if}
     {@render children?.()}
 </svelte:element>

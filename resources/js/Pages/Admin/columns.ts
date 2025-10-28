@@ -97,6 +97,10 @@ export const columns: ColumnDef<User>[] = [
                 roles: row.original.roles,
             }),
         enableSorting: false,
+        filterFn: (row, id, value) => {
+            const roles = row.getValue(id) as Role[];
+            return roles.some((role) => value.includes(role.slug));
+        },
     },
     {
         accessorKey: 'email_verified_at',
@@ -106,6 +110,11 @@ export const columns: ColumnDef<User>[] = [
                 verified: row.original.email_verified_at !== null,
             }),
         enableSorting: false,
+        enableHiding: false,
+        filterFn: (row, id, value) => {
+            const isVerified = row.getValue(id) !== null;
+            return value.includes(isVerified ? 'verified' : 'unverified');
+        },
     },
     {
         accessorKey: 'created_at',
@@ -114,6 +123,7 @@ export const columns: ColumnDef<User>[] = [
                 onclick: column.getToggleSortingHandler(),
                 label: 'Created At',
             }),
+        enableHiding: false,
         cell: ({ row }) => {
             const dateSnippet = createRawSnippet<[{ date: string }]>(
                 (getDate) => {

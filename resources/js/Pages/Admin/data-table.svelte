@@ -7,11 +7,12 @@
         type SortingState,
         type VisibilityState,
         getCoreRowModel,
+        getFacetedUniqueValues,
         getFilteredRowModel,
         getPaginationRowModel,
         getSortedRowModel,
     } from '@tanstack/table-core';
-    import { ChevronDownIcon } from '@lucide/svelte';
+    import { ChevronDownIcon, XIcon } from '@lucide/svelte';
     import {
         createSvelteTable,
         FlexRender,
@@ -20,6 +21,13 @@
     import { Button } from '$lib/components/ui/button/index.js';
     import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
     import { Input } from '$lib/components/ui/input/index.js';
+    import DataTableFacetedFilter from './data-table/data-table-faceted-filter.svelte';
+    import {
+        ShieldIcon,
+        UserIcon,
+        CheckCircleIcon,
+        AlertCircleIcon,
+    } from '@lucide/svelte';
 
     type DataTableProps<TData, TValue> = {
         columns: ColumnDef<TData, TValue>[];
@@ -32,8 +40,20 @@
         data,
         columns,
         filterColumn = 'email',
-        filterPlaceholder = 'Filter emails...',
+        filterPlaceholder = 'Filter by email...',
     }: DataTableProps<TData, TValue> = $props();
+
+    const roleOptions = [
+        { label: 'Admin', value: 'admin', icon: ShieldIcon },
+        { label: 'User', value: 'user', icon: UserIcon },
+    ];
+
+    const statusOptions = [
+        { label: 'Verified', value: 'verified', icon: CheckCircleIcon },
+        { label: 'Unverified', value: 'unverified', icon: AlertCircleIcon },
+    ];
+
+    const isFiltered = $derived(columnFilters.length > 0);
 
     let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 10 });
     let sorting = $state<SortingState>([]);
@@ -67,6 +87,7 @@
         getPaginationRowModel: getPaginationRowModel(),
         getSortedRowModel: getSortedRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
+        getFacetedUniqueValues: getFacetedUniqueValues(),
         onPaginationChange: (updater) => {
             if (typeof updater === 'function') {
                 pagination = updater(pagination);
@@ -106,7 +127,7 @@
 </script>
 
 <div class="flex w-full flex-col gap-4">
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-2">
         <Input
             placeholder={filterPlaceholder}
             value={(table
@@ -121,12 +142,41 @@
                     .getColumn(filterColumn)
                     ?.setFilterValue(e.currentTarget.value);
             }}
-            class="max-w-lg"
+            class="h-8 w-[150px] lg:w-[250px]"
         />
+        {#if table.getColumn('roles')}
+            <DataTableFacetedFilter
+                column={table.getColumn('roles')}
+                title="Role"
+                options={roleOptions}
+            />
+        {/if}
+        {#if table.getColumn('email_verified_at')}
+            <DataTableFacetedFilter
+                column={table.getColumn('email_verified_at')}
+                title="Status"
+                options={statusOptions}
+            />
+        {/if}
+        {#if isFiltered}
+            <Button
+                variant="ghost"
+                onclick={() => table.resetColumnFilters()}
+                class="h-8 px-2 lg:px-3"
+            >
+                Reset
+                <XIcon class="ml-2 size-4" />
+            </Button>
+        {/if}
         <DropdownMenu.Root>
             <DropdownMenu.Trigger>
                 {#snippet child({ props })}
-                    <Button {...props} variant="outline" class="ml-auto">
+                    <Button
+                        {...props}
+                        variant="outline"
+                        size="sm"
+                        class="ml-auto h-8"
+                    >
                         Columns <ChevronDownIcon class="ml-2 size-4" />
                     </Button>
                 {/snippet}

@@ -90,7 +90,10 @@ export const columns: ColumnDef<User>[] = [
         },
     },
     {
-        accessorKey: 'roles',
+        id: 'roles',
+        accessorFn: (row) => {
+            return row.roles.map((role) => role.slug);
+        },
         header: 'Role',
         cell: ({ row }) =>
             renderComponent(DataTableRoleBadges, {
@@ -98,12 +101,17 @@ export const columns: ColumnDef<User>[] = [
             }),
         enableSorting: false,
         filterFn: (row, id, value) => {
-            const roles = row.getValue(id) as Role[];
-            return roles.some((role) => value.includes(role.slug));
+            const roleSlugs = row.getValue(id) as string[];
+            return value.some((filterValue: string) =>
+                roleSlugs.includes(filterValue),
+            );
         },
     },
     {
-        accessorKey: 'email_verified_at',
+        id: 'email_verified_at',
+        accessorFn: (row) => {
+            return row.email_verified_at !== null ? 'verified' : 'unverified';
+        },
         header: 'Status',
         cell: ({ row }) =>
             renderComponent(DataTableStatusBadge, {
@@ -112,8 +120,7 @@ export const columns: ColumnDef<User>[] = [
         enableSorting: false,
         enableHiding: false,
         filterFn: (row, id, value) => {
-            const isVerified = row.getValue(id) !== null;
-            return value.includes(isVerified ? 'verified' : 'unverified');
+            return value.includes(row.getValue(id));
         },
     },
     {

@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { Badge } from '$lib/components/ui/badge/index.js';
+    import { Badge } from '$lib/components/ui/badge';
     import { ShieldIcon, UserIcon } from '@lucide/svelte';
-    import type { Role } from '../columns.js';
+    import type { Role } from '../columns';
 
     let { roles }: { roles: Role[] } = $props();
 

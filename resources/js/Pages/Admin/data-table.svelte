@@ -53,13 +53,13 @@
         { label: 'Unverified', value: 'unverified', icon: AlertCircleIcon },
     ];
 
-    const isFiltered = $derived(columnFilters.length > 0);
-
     let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 10 });
     let sorting = $state<SortingState>([]);
     let columnFilters = $state<ColumnFiltersState>([]);
     let rowSelection = $state<RowSelectionState>({});
     let columnVisibility = $state<VisibilityState>({});
+
+    const isFiltered = $derived(columnFilters.length > 0);
 
     const table = createSvelteTable({
         get data() {

@@ -9,6 +9,7 @@
     import { useForm } from '@inertiajs/svelte';
     import { Pencil } from '@lucide/svelte';
     import { toast } from 'svelte-sonner';
+    import { cn } from '$lib/utils';
 
     type Props = {
         className?: string;
@@ -78,7 +79,7 @@
     }
 </script>
 
-<section class={className}>
+<section class={cn('flex flex-col gap-6', className)}>
     <header class="flex flex-col gap-2">
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             Profile Information
@@ -89,8 +90,8 @@
         </p>
     </header>
 
-    <form onsubmit={submit} class="mt-6 space-y-6">
-        <div class="col-span-6 sm:col-span-4">
+    <form onsubmit={submit} class="flex flex-col gap-4">
+        <div class="flex flex-col gap-2">
             <!-- Hidden file input for photo upload -->
             <input
                 id="photo"
@@ -133,7 +134,7 @@
             </div>
         </div>
 
-        <div class="col-span-6 sm:col-span-4">
+        <div class="flex flex-col gap-2">
             <Label for="name">Name</Label>
             <Input
                 id="name"
@@ -146,7 +147,7 @@
             <ErrorFeedback message={$form.errors.name} />
         </div>
 
-        <div class="col-span-6 sm:col-span-4">
+        <div class="flex flex-col gap-2">
             <Label for="email">Email</Label>
             <Input
                 id="email"

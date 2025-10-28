@@ -1,5 +1,11 @@
 <script lang="ts">
-    import { LayoutDashboard, LifeBuoy, Send, Shell } from '@lucide/svelte';
+    import {
+        LayoutDashboard,
+        LifeBuoy,
+        Send,
+        Shell,
+        Shield,
+    } from '@lucide/svelte';
     import type { Icon } from '@lucide/svelte';
     import NavMain from '$lib/components/ui/custom/nav-main.svelte';
     import NavProjectMembers from '$lib/components/ui/custom/nav-project-members.svelte';
@@ -7,6 +13,7 @@
     import NavUser from '$lib/components/ui/custom/nav-user.svelte';
     import * as Sidebar from '$lib/components/ui/sidebar';
     import ProjectSwitcher from './project-switcher.svelte';
+    import { page } from '@inertiajs/svelte';
 
     type Project = {
         logo: typeof Icon;
@@ -32,13 +39,24 @@
         }[];
     };
 
-    const navMain: MainNavigationItem[] = [
+    const isAdmin = $derived($page.props.auth?.user?.is_admin || false);
+
+    const navMain = $derived<MainNavigationItem[]>([
         {
             title: 'Dashboard',
             url: '/dashboard',
             icon: LayoutDashboard,
         },
-    ];
+        ...(isAdmin
+            ? [
+                  {
+                      title: 'Admin',
+                      url: '/admin/users',
+                      icon: Shield,
+                  },
+              ]
+            : []),
+    ]);
 
     type SecondaryNavigationItem = {
         title: string;

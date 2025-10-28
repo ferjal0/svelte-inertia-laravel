@@ -1,5 +1,4 @@
 <script lang="ts">
-    import Ripple from '$lib/components/ui/custom/ripple.svelte';
     import type { PageProps } from '$lib/types';
     import { Link } from '@inertiajs/svelte';
     import { Command } from '@lucide/svelte';
@@ -56,7 +55,6 @@
             <p class="text-[clamp(1.5rem,5vw,4rem)] leading-none">
                 Your landing goes here
             </p>
-            <Ripple />
         </div>
     </main>
 </div>

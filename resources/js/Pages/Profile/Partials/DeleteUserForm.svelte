@@ -3,8 +3,9 @@
     import * as Dialog from '$lib/components/ui/dialog';
     import { Input } from '$lib/components/ui/input';
     import { Label } from '$lib/components/ui/label';
+    import { cn } from '$lib/utils';
     import { useForm } from '@inertiajs/svelte';
-    import { Loader2 } from '@lucide/svelte';
+    import { Loader } from '@lucide/svelte';
 
     type Props = {
         className?: string;
@@ -53,7 +54,7 @@
     });
 </script>
 
-<section class={`flex max-w-xl flex-col gap-6 ${className}`}>
+<section class={cn('flex flex-col gap-6', className)}>
     <header class="flex flex-col gap-2">
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             Delete Account
@@ -121,7 +122,7 @@
                     disabled={$form.processing}
                 >
                     {#if $form.processing}
-                        <Loader2 class="mr-2 size-4 animate-spin" />
+                        <Loader class="mr-2 size-4 animate-spin" />
                     {/if}
                     Delete Account
                 </Button>

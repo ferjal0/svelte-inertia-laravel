@@ -125,7 +125,7 @@
                     <!-- Hover Overlay with Edit Button -->
                     <button
                         type="button"
-                        class="absolute inset-0 flex cursor-pointer items-center justify-center rounded-lg bg-black/50 opacity-0 transition-opacity group-hover:opacity-100"
+                        class="absolute inset-0 flex cursor-pointer items-center justify-center rounded-lg bg-black/50 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-black outline-none transition-[color,box-shadow,opacity]"
                         onclick={selectNewPhoto}
                     >
                         <Pencil class="h-5 w-5 text-white" />

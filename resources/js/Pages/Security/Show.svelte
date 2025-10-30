@@ -16,7 +16,7 @@
 <AuthenticatedLayout>
     <div class="flex max-w-7xl flex-col sm:px-6 lg:px-8">
         {#if isTwoFactorAuthenticationFeatureEnabled}
-            <div class="p-4 sm:p-8">
+            <div class="pt-3">
                 <TwoFactorAuthenticationForm />
             </div>
         {/if}

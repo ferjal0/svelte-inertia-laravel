@@ -1,7 +1,7 @@
 <script lang="ts">
     import AuthenticatedLayout from '$lib/layouts/AuthenticatedLayout.svelte';
     import DataTable from './data-table.svelte';
-    import { columns, type User } from './columns.js';
+    import { columns, type User } from './columns';
 
     let { users = [] } = $props<{
         users: User[];
@@ -16,8 +16,8 @@
 </script>
 
 <AuthenticatedLayout>
-    <div class="flex max-w-7xl flex-col sm:px-6 lg:px-8">
-        <div class="p-4 sm:p-8">
+    <div class="flex flex-col sm:px-6 lg:px-8">
+        <div class="pt-3">
             <section class="flex flex-col gap-6">
                 <header class="flex flex-col gap-2">
                     <h2

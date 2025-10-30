@@ -16,11 +16,11 @@
     import {
         createSvelteTable,
         FlexRender,
-    } from '$lib/components/ui/data-table/index.js';
-    import * as Table from '$lib/components/ui/table/index.js';
-    import { Button } from '$lib/components/ui/button/index.js';
-    import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
-    import { Input } from '$lib/components/ui/input/index.js';
+    } from '$lib/components/ui/data-table';
+    import * as Table from '$lib/components/ui/table';
+    import { Button } from '$lib/components/ui/button';
+    import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+    import { Input } from '$lib/components/ui/input';
     import DataTableFacetedFilter from './data-table/data-table-faceted-filter.svelte';
     import {
         ShieldIcon,
@@ -162,10 +162,10 @@
             <Button
                 variant="ghost"
                 onclick={() => table.resetColumnFilters()}
-                class="h-8 px-2 lg:px-3"
+                class="h-8"
             >
-                Reset
-                <XIcon class="ml-2 size-4" />
+                <XIcon class="size-4" />
+                Clear filters
             </Button>
         {/if}
         <DropdownMenu.Root>

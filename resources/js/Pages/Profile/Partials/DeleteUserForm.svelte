@@ -104,7 +104,7 @@
                 />
 
                 {#if $form.errors.password}
-                    <p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                    <p class="text-sm text-red-600 dark:text-red-400">
                         {$form.errors.password}
                     </p>
                 {/if}
@@ -122,7 +122,7 @@
                     disabled={$form.processing}
                 >
                     {#if $form.processing}
-                        <Loader class="mr-2 size-4 animate-spin" />
+                        <Loader class="size-4 animate-spin" />
                     {/if}
                     Delete Account
                 </Button>

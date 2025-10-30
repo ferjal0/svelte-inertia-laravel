@@ -68,10 +68,11 @@
                 type="password"
                 class="max-w-lg"
                 autocomplete="current-password"
+                aria-invalid={$form.errors.current_password ? true : false}
             />
 
             {#if $form.errors.current_password}
-                <p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                <p class="text-sm text-red-600 dark:text-red-400">
                     {$form.errors.current_password}
                 </p>
             {/if}
@@ -86,10 +87,11 @@
                 type="password"
                 class="max-w-lg"
                 autocomplete="new-password"
+                aria-invalid={$form.errors.password ? true : false}
             />
 
             {#if $form.errors.password}
-                <p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                <p class="text-sm text-red-600 dark:text-red-400">
                     {$form.errors.password}
                 </p>
             {/if}
@@ -104,10 +106,11 @@
                 type="password"
                 class="max-w-lg"
                 autocomplete="new-password"
+                aria-invalid={$form.errors.password_confirmation ? true : false}
             />
 
             {#if $form.errors.password_confirmation}
-                <p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                <p class="text-sm text-red-600 dark:text-red-400">
                     {$form.errors.password_confirmation}
                 </p>
             {/if}

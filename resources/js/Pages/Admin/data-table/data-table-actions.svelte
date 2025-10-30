@@ -58,10 +58,10 @@
             <DropdownMenu.Separator />
             <DropdownMenu.Item>View details</DropdownMenu.Item>
             <DropdownMenu.Item
-                class="text-destructive focus:text-destructive"
                 onclick={() => (showDeleteDialog = true)}
+                variant="destructive"
             >
-                <Trash2Icon class="mr-2 size-4" />
+                <Trash2Icon class="size-4" />
                 Delete user
             </DropdownMenu.Item>
         </DropdownMenu.Content>

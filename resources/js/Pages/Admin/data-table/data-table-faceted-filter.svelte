@@ -1,14 +1,14 @@
 <script lang="ts" generics="TData, TValue">
     import type { Column } from '@tanstack/table-core';
-    import { PlusCircleIcon, CheckIcon } from '@lucide/svelte';
-    import { Badge } from '$lib/components/ui/badge/index.js';
-    import { Button } from '$lib/components/ui/button/index.js';
-    import * as Command from '$lib/components/ui/command/index.js';
-    import * as Popover from '$lib/components/ui/popover/index.js';
-    import { Separator } from '$lib/components/ui/separator/index.js';
-    import { cn } from '$lib/utils.js';
+    import { CirclePlusIcon, CheckIcon } from '@lucide/svelte';
+    import { Badge } from '$lib/components/ui/badge';
+    import { Button } from '$lib/components/ui/button';
+    import * as Command from '$lib/components/ui/command';
+    import * as Popover from '$lib/components/ui/popover';
+    import { Separator } from '$lib/components/ui/separator';
 
     import type { Component } from 'svelte';
+    import { Checkbox } from '$lib/components/ui/checkbox';
 
     type FilterOption = {
         label: string;
@@ -58,7 +58,7 @@
                 size="sm"
                 class="h-8 border-dashed"
             >
-                <PlusCircleIcon class="mr-2 size-4" />
+                <CirclePlusIcon class="size-4" />
                 {title}
                 {#if selectedValues.size > 0}
                     <Separator orientation="vertical" class="mx-2 h-4" />
@@ -103,21 +103,10 @@
                             value={option.value}
                             onSelect={() => handleSelect(option.value)}
                         >
-                            <div
-                                class={cn(
-                                    'mr-2 flex size-4 items-center justify-center rounded-sm border border-primary',
-                                    isSelected
-                                        ? 'bg-primary text-primary-foreground'
-                                        : 'opacity-50 [&_svg]:invisible',
-                                )}
-                            >
-                                <CheckIcon class="size-4" />
-                            </div>
+                            <Checkbox checked={isSelected} />
                             {#if option.icon}
                                 {@const Icon = option.icon}
-                                <Icon
-                                    class="mr-2 size-4 text-muted-foreground"
-                                />
+                                <Icon class="size-4 text-muted-foreground" />
                             {/if}
                             <span>{option.label}</span>
                             {#if facets?.get(option.value)}

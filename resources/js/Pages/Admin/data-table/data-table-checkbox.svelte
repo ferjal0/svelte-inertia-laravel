@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { ComponentProps } from 'svelte';
-    import { Checkbox } from '$lib/components/ui/checkbox/index.js';
+    import { Checkbox } from '$lib/components/ui/checkbox';
 
     let {
         checked = false,

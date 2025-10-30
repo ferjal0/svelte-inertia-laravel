@@ -108,8 +108,8 @@
     </Sidebar.Header>
     <Sidebar.Content>
         <NavMain items={navMain} />
-        <NavProjectMembers members={projectMembers} />
-        <NavSecondary items={navSecondary} class="mt-auto" />
+        <NavProjectMembers members={projectMembers} class="mt-auto" />
+        <NavSecondary items={navSecondary} />
     </Sidebar.Content>
     <Sidebar.Footer>
         <NavUser />

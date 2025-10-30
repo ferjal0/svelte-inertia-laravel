@@ -3,6 +3,7 @@
     import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
     import * as Sidebar from '$lib/components/ui/sidebar';
     import { useSidebar } from '$lib/components/ui/sidebar';
+    import { cn } from '$lib/utils';
 
     interface NavProjectMembersProps {
         members: {
@@ -10,13 +11,14 @@
             url: string;
             isConnected: boolean;
         }[];
+        class?: string;
     }
 
-    export let members: NavProjectMembersProps['members'];
+    const { members, class: className }: NavProjectMembersProps = $props();
     const { isMobile } = useSidebar();
 </script>
 
-<Sidebar.Group class="group-data-[collapsible=icon]:hidden">
+<Sidebar.Group class={cn('group-data-[collapsible=icon]:hidden', className)}>
     <Sidebar.GroupLabel>Project Members</Sidebar.GroupLabel>
     <Sidebar.Menu>
         {#each members as member (member.name)}

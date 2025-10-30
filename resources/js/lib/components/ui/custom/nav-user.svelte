@@ -91,13 +91,6 @@
                 </DropdownMenu.Label>
                 <DropdownMenu.Separator />
                 <DropdownMenu.Group>
-                    <DropdownMenu.Item disabled>
-                        <Sparkles />
-                        Upgrade to Pro
-                    </DropdownMenu.Item>
-                </DropdownMenu.Group>
-                <DropdownMenu.Separator />
-                <DropdownMenu.Group>
                     <DropdownMenu.Item>
                         {#snippet child({ props })}
                             <Link {...props} href={route('profile.show')}>
@@ -113,14 +106,6 @@
                                 Security
                             </Link>
                         {/snippet}
-                    </DropdownMenu.Item>
-                    <DropdownMenu.Item disabled>
-                        <CreditCard />
-                        Billing
-                    </DropdownMenu.Item>
-                    <DropdownMenu.Item disabled>
-                        <Bell />
-                        Notifications
                     </DropdownMenu.Item>
                     <DropdownMenu.Sub>
                         <DropdownMenu.SubTrigger>

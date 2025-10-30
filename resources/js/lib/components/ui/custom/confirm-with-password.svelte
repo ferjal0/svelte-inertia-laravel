@@ -6,6 +6,7 @@
     import { Label } from '$lib/components/ui/label';
     import type { Snippet } from 'svelte';
     import axios from 'axios';
+    import { Loader } from '@lucide/svelte';
 
     interface ConfirmWithPasswordProps {
         onConfirm: (password: string) => void;
@@ -108,6 +109,9 @@
             <Button variant="outline" onclick={closeModal}>Cancel</Button>
 
             <Button onclick={confirmPassword} disabled={processing}>
+                {#if processing}
+                    <Loader class="size-4 animate-spin" />
+                {/if}
                 Confirm
             </Button>
         </Dialog.Footer>

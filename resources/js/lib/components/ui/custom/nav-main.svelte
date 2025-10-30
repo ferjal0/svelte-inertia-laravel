@@ -65,17 +65,16 @@
                                 </Sidebar.MenuSub>
                             </Collapsible.Content>
                         {:else}
-                            <Link href={mainItem.url}>
-                                <Sidebar.MenuButton {...props}>
-                                    {#snippet tooltipContent()}
-                                        {mainItem.title}
-                                    {/snippet}
-                                    {#if mainItem.icon}
-                                        <mainItem.icon />
-                                    {/if}
-                                    <span>{mainItem.title}</span>
-                                </Sidebar.MenuButton>
-                            </Link>
+                            <Sidebar.MenuButton {...props}>
+                                {#snippet child({ props })}
+                                    <Link href={mainItem.url} {...props}>
+                                        {#if mainItem.icon}
+                                            <mainItem.icon />
+                                        {/if}
+                                        <span>{mainItem.title}</span>
+                                    </Link>
+                                {/snippet}
+                            </Sidebar.MenuButton>
                         {/if}
                     </Sidebar.MenuItem>
                 {/snippet}

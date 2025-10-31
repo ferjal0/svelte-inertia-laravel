@@ -10,9 +10,33 @@
     } from './constants.js';
     import { setSidebar } from './context.svelte.js';
 
+    /**
+     * Reads the sidebar state from the cookie.
+     * @returns The sidebar state from the cookie, or true if the cookie is not set.
+     */
+    function getCookieValue(): boolean {
+        if (typeof document === 'undefined') return true;
+
+        const name = SIDEBAR_COOKIE_NAME + '=';
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const cookieArray = decodedCookie.split(';');
+
+        for (let i = 0; i < cookieArray.length; i++) {
+            let cookie = cookieArray[i];
+            while (cookie.charAt(0) === ' ') {
+                cookie = cookie.substring(1);
+            }
+            if (cookie.indexOf(name) === 0) {
+                const value = cookie.substring(name.length, cookie.length);
+                return value === 'true';
+            }
+        }
+        return true; // Default to open if cookie is not set
+    }
+
     let {
         ref = $bindable(null),
-        open = $bindable(true),
+        open = $bindable(getCookieValue()),
         onOpenChange = () => {},
         class: className,
         style,

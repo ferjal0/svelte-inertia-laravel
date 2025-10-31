@@ -44,8 +44,8 @@
     }: DataTableProps<TData, TValue> = $props();
 
     const roleOptions = [
-        { label: 'Admin', value: 'admin', icon: ShieldIcon },
-        { label: 'User', value: 'user', icon: UserIcon },
+        { label: 'Administrator', value: 'admin', icon: ShieldIcon },
+        { label: 'Regular User', value: 'regular', icon: UserIcon },
     ];
 
     const statusOptions = [

@@ -9,7 +9,7 @@
         switch (roleSlug) {
             case 'admin':
                 return 'violet';
-            case 'user':
+            case 'regular':
                 return 'zinc';
             default:
                 return 'zinc';
@@ -20,7 +20,7 @@
         switch (roleSlug) {
             case 'admin':
                 return ShieldIcon;
-            case 'user':
+            case 'regular':
                 return UserIcon;
             default:
                 return UserIcon;

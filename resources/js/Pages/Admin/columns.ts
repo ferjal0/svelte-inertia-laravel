@@ -49,6 +49,7 @@ export const columns: ColumnDef<User>[] = [
         header: ({ column }) =>
             renderComponent(DataTableSortableHeader, {
                 onclick: column.getToggleSortingHandler(),
+                sorted: column.getIsSorted(),
                 label: 'Name',
             }),
         cell: ({ row }) => {
@@ -70,6 +71,7 @@ export const columns: ColumnDef<User>[] = [
         header: ({ column }) =>
             renderComponent(DataTableSortableHeader, {
                 onclick: column.getToggleSortingHandler(),
+                sorted: column.getIsSorted(),
                 label: 'Email',
             }),
         cell: ({ row }) => {
@@ -125,6 +127,7 @@ export const columns: ColumnDef<User>[] = [
         header: ({ column }) =>
             renderComponent(DataTableSortableHeader, {
                 onclick: column.getToggleSortingHandler(),
+                sorted: column.getIsSorted(),
                 label: 'Created At',
             }),
         enableHiding: false,

@@ -1,6 +1,6 @@
 <script lang="ts" generics="TData, TValue">
     import type { Column } from '@tanstack/table-core';
-    import { CirclePlusIcon, CheckIcon } from '@lucide/svelte';
+    import { CirclePlusIcon } from '@lucide/svelte';
     import { Badge } from '$lib/components/ui/badge';
     import { Button } from '$lib/components/ui/button';
     import * as Command from '$lib/components/ui/command';
@@ -46,6 +46,30 @@
 
     function clearFilters() {
         column?.setFilterValue(undefined);
+    }
+
+    function getOptionCount(value: string): number {
+        const map = facets as Map<unknown, number> | undefined;
+        const fromFacets = map?.get(value as unknown as never);
+        if (typeof fromFacets === 'number') {
+            return fromFacets;
+        }
+
+        const faceted = column?.getFacetedRowModel?.();
+        const rows =
+            faceted?.flatRows ?? column?.getFacetedRowModel?.().flatRows;
+        if (!rows) return 0;
+
+        let count = 0;
+        for (const row of rows) {
+            const cellValue = row.getValue(String(column?.id ?? ''));
+            if (Array.isArray(cellValue)) {
+                if (cellValue.includes(value)) count++;
+            } else if (cellValue === value) {
+                count++;
+            }
+        }
+        return count;
     }
 </script>
 
@@ -109,13 +133,11 @@
                                 <Icon class="size-4 text-muted-foreground" />
                             {/if}
                             <span>{option.label}</span>
-                            {#if facets?.get(option.value)}
-                                <span
-                                    class="ml-auto flex size-4 items-center justify-center font-mono text-xs"
-                                >
-                                    {facets.get(option.value)}
-                                </span>
-                            {/if}
+                            <span
+                                class="ml-auto flex size-4 items-center justify-center font-mono text-xs"
+                            >
+                                {getOptionCount(option.value)}
+                            </span>
                         </Command.Item>
                     {/each}
                 </Command.Group>

@@ -66,6 +66,9 @@
                             </Collapsible.Content>
                         {:else}
                             <Sidebar.MenuButton {...props}>
+                                {#snippet tooltipContent()}
+                                    {mainItem.title}
+                                {/snippet}
                                 {#snippet child({ props })}
                                     <Link href={mainItem.url} {...props}>
                                         {#if mainItem.icon}

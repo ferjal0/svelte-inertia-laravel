@@ -9,12 +9,13 @@
         CommandList,
         CommandSeparator,
     } from '$lib/components/ui/command';
-    import { router } from '@inertiajs/svelte';
+    import { router, page } from '@inertiajs/svelte';
     import {
         BadgeCheck,
         LayoutDashboard,
         Lock,
         Moon,
+        Shield,
         Sun,
     } from '@lucide/svelte';
     import { onMount } from 'svelte';
@@ -26,7 +27,9 @@
         icon: typeof Moon;
     }
 
-    const navigationItems: NavigationItem[] = [
+    const isAdmin = $derived($page.props.auth?.user?.is_admin || false);
+
+    const navigationItems = $derived<NavigationItem[]>([
         {
             title: 'Dashboard',
             href: '/dashboard',
@@ -42,7 +45,16 @@
             href: '/account/security',
             icon: Lock,
         },
-    ];
+        ...(isAdmin
+            ? [
+                  {
+                      title: 'Admin - Users',
+                      href: '/admin/users',
+                      icon: Shield,
+                  },
+              ]
+            : []),
+    ]);
 
     let isOpen = $state(false);
 

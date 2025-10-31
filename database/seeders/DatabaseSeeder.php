@@ -16,17 +16,23 @@ class DatabaseSeeder extends Seeder
         // Seed roles and permissions first
         $this->call(RolesAndPermissionsSeeder::class);
 
-        // Create a regular user
-        $user = User::factory()->create([
-            'name' => 'User',
-            'email' => 'user@example.com',
-            'email_verified_at' => now(),
-            'password' => bcrypt('password'), // password
-            'remember_token' => Str::random(10),
-        ]);
-        $user->assignRole('regular');
+        // Create 85 regular users: 60 verified, 25 unverified
+        User::factory()
+            ->count(60)
+            ->create()
+            ->each(function (User $user) {
+                $user->assignRole('regular');
+            });
 
-        // Create an admin user
+        User::factory()
+            ->count(25)
+            ->unverified()
+            ->create()
+            ->each(function (User $user) {
+                $user->assignRole('regular');
+            });
+
+        // Create 15 admins total: keep one named admin, add 11 verified + 3 unverified
         $admin = User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
@@ -35,5 +41,20 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
         $admin->assignRole('admin');
+
+        User::factory()
+            ->count(11)
+            ->create()
+            ->each(function (User $user) {
+                $user->assignRole('admin');
+            });
+
+        User::factory()
+            ->count(3)
+            ->unverified()
+            ->create()
+            ->each(function (User $user) {
+                $user->assignRole('admin');
+            });
     }
 }
